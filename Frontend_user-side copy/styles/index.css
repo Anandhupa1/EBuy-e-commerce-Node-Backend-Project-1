@@ -1,0 +1,168 @@
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Armata', sans-serif;
+}
+
+/* swiper start*/
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+/* 
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}  */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* swiper end */
+
+/* image display start */
+
+#offer{
+    width: 100%;
+    height: auto;
+    
+    display: block;
+    padding-top: 100px;
+}
+#offer img{
+    width: 100%;
+}
+.imageDiv{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    
+}
+.imageDiv img{
+    width: 100%;
+}
+.products{
+    width: 95%;
+    height: auto;
+   
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+.products>div{
+    width: 31%;
+    height: auto;
+    overflow: hidden;
+
+}
+.products>div img{
+    width: 100%;
+}
+
+
+/* swiperjs starts */
+.swiper {
+    /* container */
+    width: 93%;
+    height: 400px;
+   
+
+    /* additional */
+ 
+    /* width: 95%; */
+    margin-bottom: 80px;
+  
+  
+    padding: 30px;
+    padding-left: 10px;
+    padding-right: 0px;
+  
+    margin-left: 150px;
+    
+   
+
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+
+    /* additional */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 60%;
+    
+  }
+  #youMayLikeheading{
+    font-size: xx-large;
+    margin-left:50px ;
+    padding: 20px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 25px;
+  }
+#swiperHalf{
+
+}
+/* swiperjs ends here */
