@@ -5,21 +5,24 @@ const {UserModel}=require('./models/user.model.js');
 const {connection}=require('./config/connection')
 const {regRouter}=require('./routes/register.js');
 const {loginRouter}=require('./routes/login');
-//const {auth}=require('./middlewares/auth');
+const path = require('path');
+const cors = require('cors')
+const { productModel } = require('./models/products.model.js');
+const { productRouter } = require('./routes/product.js');
+const {auth}=require('./middlewares/auth');
 
-
+ app.use(cors())
  app.use(express.json());
 //______________________________________________________________
-app.get('/',async(req,res)=>{
-    res.sendFile('views/index.html', {root: __dirname })
-})
+
+app.get('/',auth, function(req, res) {
+    res.sendFile(path.join(__dirname, './views/index.html'));
+  });
 
  app.use("/users/register",regRouter);
  app.use("/users/login",loginRouter);
+ app.use("/products",productRouter)
 
-// app.get('/',auth,(req,res)=>{
-//     res.send("homee page")
-// })
 // app.use('/notes',noteRoute)
 
 

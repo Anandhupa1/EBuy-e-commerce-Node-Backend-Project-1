@@ -10,7 +10,7 @@ let incToken = req.headers.authtoken;
 
 await jwt.verify(incToken, 'masai', function(err, decoded) {
   
-  //console.log(decoded.userId,"decoded");
+  console.log(decoded.userId,"decoded");
   req.body.userId =decoded.userId;
  // console.log(req.body)
  //_________________________
