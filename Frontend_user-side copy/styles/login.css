@@ -1,0 +1,88 @@
+*{
+    font-family:  sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f3f3f3;
+    color: #d3665c;
+    font-family: sans-serif;
+  }
+  
+  .container {
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    padding: 32px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #f3f3f3;
+    display: none;
+  }
+  
+  .preloader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #d3665c;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    color: ;
+  }
+  
+  p {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    background-color: #f3f3f3;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d3665c;
+    border-radius: 4px;
+    background-color: #d3665c;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .container{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  }
+  .container>img{
+    width: 70%;
+  }
+  #dontHaveAccount{
+    color: #494745;
+  }
+  #dontHaveAccount a{
+    color: #d3665c;
+  }
