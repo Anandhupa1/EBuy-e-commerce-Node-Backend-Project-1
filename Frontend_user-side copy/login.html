@@ -17,13 +17,23 @@
 <body>
    
   <div class="preloader"></div>
-  <div class="container">
+  <!-- modal box instead of alert -->
+  <!-- <div class="Modalcontainer">
+    <div class="cookiesContent" id="cookiesPopup">
+      <button class="close">✖</button>
+      <img id="modalImg" src="https://cdn-icons-ng.flaticon.com/512/1047/1047711.png" alt="cookies-img" />
+      <p id="modalMsg" >We use cookies for improving user experience, analytics and marketing.</p>
+      <button class="accept">ok</button>
+    </div>
+  </div> -->
+ <!-- modal box instead of alert ends -->
+  <div id="modal" class="container">
     <h1 style="color: #403d40;" >Login</h1>
     <img src="./images/logo.png" />
     
-    <form>
-      <input type="email" placeholder="Email address">
-      <input type="password" placeholder="Password">
+    <form id="form" >
+      <input id="email" type="email" placeholder="Email address">
+      <input id="password" type="password" placeholder="Password">
       <button type="submit">Login</button>
     </form>
     <p id="dontHaveAccount" >don't have an account | <a href="./signup.html">sign up</a></p>

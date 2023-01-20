@@ -41,7 +41,10 @@ body{
  }
 
  /* productFilter start */
-
+#filter{
+  background-color: #d3665c;
+  border: 2px solid red;
+}
 
  /* productFilter ends */
 
@@ -384,18 +387,37 @@ body{
    
 }
 #container{
-    background-color: aqua;
-    height: 500px;
+ 
+    height: auto;
     width: 100%;
     margin-top: 40px;
     display: flex;
+    justify-content: space-evenly;
 
 }
 #container>div:nth-child(1){
     height: 100%;
     width: 20%;
     margin-left: 10px;
-    background-color: #c4bfbf;
+    background-color: #fff;
+    border: 2px solid grey;
+    padding: 20px;
+    margin-right: 20px;
+    margin-bottom: 50px;
     
 }
-
+#container>div:nth-child(2){
+background-color: #fff;
+height:auto;
+width: 75%;
+/* border: 2px solid grey;
+padding: 30px; */
+display: grid;
+grid-template-columns:repeat(4,20%);
+grid-auto-rows: 400px;
+gap: 5%;
+margin: auto;
+}
+#container>div:nth-child(2)>div{
+  background-color: blueviolet;
+}

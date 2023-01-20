@@ -6,9 +6,17 @@ const {auth }= require('../middlewares/auth')
 
 productRouter.post("/",auth,async (req,res)=>{
     try{
-        let newProduct = new productModel(req.body);
-        await newProduct.save();
-        res.status(200).json({result:"success",productDetails:newProduct});
+        let image = req.body.name;
+        let productExists = await productModel.find({image})
+        // if(productExists){
+        //     res.status(409).json({error :"product  already exists"})
+        // }
+        // else{
+            let newProduct = new productModel(req.body);
+            await newProduct.save();
+            res.status(200).json({result:"success",productDetails:newProduct});
+       // }
+
     }
     catch(err){
         console.log("error;_______________post:product");
@@ -20,7 +28,7 @@ productRouter.post("/",auth,async (req,res)=>{
 
 
 productRouter.get('/',async(req,res)=>{
-    let data = productModel.find();
+    let data =await productModel.find();
     res.send(data)
 })
 
