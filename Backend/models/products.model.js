@@ -22,9 +22,9 @@ const productSchema = mongoose.Schema({
        subCategory  : {type:String, required : true},
        subCategoryImg  : {type:String, required : true},
        sku :[skuSchema],
-       userId : {type :String, required :true}
+       userId : {type :String}
 },{versionKey : false});
 
 const productModel = mongoose.model("product", productSchema );
 
-module.exports={productModel};
+module.exports={productModel,productSchema};

@@ -53,4 +53,4 @@ const UserModel = mongoose.model('user',userSchema);
 // -confirm password ==> Input Field (Type: Password)
 
 
-module.exports={UserModel}
+module.exports={UserModel,addressSchema}

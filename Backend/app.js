@@ -6,10 +6,12 @@ const {connection}=require('./config/connection')
 const {regRouter}=require('./routes/register.js');
 const {loginRouter}=require('./routes/login');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
+const nodemailer = require('nodemailer')
 const { productModel } = require('./models/products.model.js');
 const { productRouter } = require('./routes/product.js');
 const {auth}=require('./middlewares/auth');
+const { orderRouter } = require('./routes/order.js');
 
  app.use(cors())
  app.use(express.json());
@@ -21,7 +23,8 @@ app.get('/',auth, function(req, res) {
 
  app.use("/users/register",regRouter);
  app.use("/users/login",loginRouter);
- app.use("/products",productRouter)
+ app.use("/products",productRouter);
+ app.use("/orders",orderRouter);
 
 // app.use('/notes',noteRoute)
 
