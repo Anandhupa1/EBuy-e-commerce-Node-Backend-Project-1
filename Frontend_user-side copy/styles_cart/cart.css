@@ -229,7 +229,7 @@ background-color: #fff;
     font-weight: 500;
     font-size: x-large;
     border: 1px solid grey;
-    border-radius: 50%;
+    /* border-radius: 50%; */
    }
    #button_div>button:nth-child(1):hover,#button_div>button:nth-child(3):hover{
     background-color: #21a97e;

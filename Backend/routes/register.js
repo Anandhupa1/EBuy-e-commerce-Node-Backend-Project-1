@@ -3,7 +3,7 @@ const express = require('express');
 const { UserModel } = require('../models/user.model.js');
 const regRouter = express.Router();
 // regRouter.use(express.json())
-
+const{ auth} = require('../middlewares/auth');
 
 regRouter.post('/',async (req,res)=>{
     let {userName,email,DOB,role,location,password,cpassword}=req.body;
@@ -33,6 +33,29 @@ regRouter.post('/',async (req,res)=>{
    
 });
 
+
+regRouter.put('/',auth,async (req,res)=>{
+  
+    try{
+        let {shippingAddress}=req.body
+    let theUser = await UserModel.findOne({_id:req.body.userId});
+    let obj = {...theUser._doc}
+    obj.shippingAddress = shippingAddress;
+    //theUser._doc["shippingAddress"] = shippingAddress;
+
+
+    let userData =await UserModel.findOneAndReplace({_id:req.body.userId},{theUser},{new:true});
+    let out = await UserModel.findById(req.body.userId)
+    res.send(out)
+    }
+    catch(err){
+        console.log("error : register-patch _________________________________")
+        console.log(err)
+    }
+    
+    
+   
+});
 
 
 

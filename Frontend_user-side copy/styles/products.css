@@ -409,15 +409,26 @@ body{
 #container>div:nth-child(2){
 background-color: #fff;
 height:auto;
-width: 75%;
+width: 80%;
 /* border: 2px solid grey;
 padding: 30px; */
 display: grid;
 grid-template-columns:repeat(4,20%);
-grid-auto-rows: 400px;
-gap: 5%;
+grid-auto-rows: auto;
+gap: 2%;
 margin: auto;
 }
 #container>div:nth-child(2)>div{
-  background-color: blueviolet;
+  border: 1px solid grey;
+  padding: 5px;
+}
+#products>div>img{
+width: 100%;
+display: flex;
+flex-direction: column;
+
+
+}
+#products>div>button{
+  background-color: #d3665c;
 }

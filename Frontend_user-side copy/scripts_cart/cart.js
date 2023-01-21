@@ -1,60 +1,18 @@
-//putting dummy data in ls
-let u1={
-    "id": 1,
-    "userName": "Anandhu P A",
-    "profilePic":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/985.jpg",
-    "Address" : "Anandhu P A, Perumoola(H) Kailasanadu PO Pothakkally Idukky District Kerala, Kerala Idukki, Kerala - 685553 9526332548",
-    "cartItems": [{
-        "createdAt": "2022-12-10T04:24:59.885Z",
-        "image": "https://cdn13.nnnow.com/web-images/medium/styles/6QFRWWY6GN7/1589003350410/1.jpg",
-        "category": "Perfume",
-        "title": "Oud Wood Eau De Parfum",
-        "price": 25300,
-        "rating": [5,3],
-        "discount": 5,
-        "id": "1",
-        "count":3
-        },
-        {
-        "createdAt": "2022-12-09T11:49:47.804Z",
-        "image": "https://cdn12.nnnow.com/web-images/medium/styles/SK7N1M9ICBQ/1583390837736/1.jpg",
-        "category": "Perfume",
-        "title": "Beau De Jour Eau De Parfum",
-        "price": 13600,
-        "rating": [5],
-        "discount": 5,
-        "id": "2",
-        "count":4
-        },
-        {
-            "createdAt": "2022-12-10T07:47:57.232Z",
-            "image": "https://cdn04.nnnow.com/web-images/medium/styles/JWDVPXLPG9P/1639113646812/1.jpg",
-            "category": "Perfume",
-            "title": "Ombre Leather Parfum",
-            "price": 16000,
-            "rating": [
-            5
-            ],
-            "discount": 5,
-            "id": "4",
-            "count":2
-            },
-        
 
-    ],
-    
-    "orders":[],
 
-    "additionalInfo":[]
-    
-  }
 //localStorage.setItem("userdata",JSON.stringify(u1));
 localStorage.setItem("promoCodeApplied",false);
 // localStorage.setItem("finalPrice",0);
 
 //start cart
-let localUserData = JSON.parse(localStorage.getItem("userdata"));
-console.log("localuserData", localUserData)
+// let localCart = JSON.parse(localStorage.getItem("cart"));
+// // localCart.forEach((item)=>{
+// //     item.sku[0].quantity=1
+// // });
+// // console.log(localCart[0],"cartItem")
+// localStorage.setItem("cart",JSON.stringify(localCart))
+
+
 let id = localStorage.getItem("userId")
 
 
@@ -65,9 +23,7 @@ let cartItemDiv  = document.querySelector(".cartItems");
 
 //prev
  let overView  = document.querySelector("#overview");
-// let cartItemDiv  = document.querySelector(".cartItems");
-// let cartItemDiv  = document.querySelector(".cartItems");
-// let cartItemDiv  = document.querySelector(".cartItems");
+
 //locally stored data
 let LocalUserData = JSON.parse(localStorage.getItem("userData"))|[];
 let userId = LocalUserData.id||2;
@@ -84,319 +40,14 @@ shopMoreBtn.addEventListener("click",()=>{
     window.location.replace("../product1.html")
 });
 
+//___________________________________________________________________________
 
+let cartItems = JSON.parse(localStorage.getItem("cart"));
+console.log(JSON.stringify(cartItems,null,3))
+displayCart(cartItems)
 
 
-// // api start******************************************************************
-// //fetching users
-// fetchUsers()
-// async function fetchUsers(){
-//     let usersarr;
 
-//     try{
-//     let res = await fetch("https://639c5a3b16d1763ab1472b90.mockapi.io/cart");
-//     if(res.ok){
-//         let usersarr1 = await res.json();
-//         usersarr = usersarr1;
-//         console.log(usersarr)
-//     }
-//     else {alert("error happened while fetching cartitems from cart page")}
-//     }
-//     catch(err){console.log(err, "this error is catched while fetching cartItems in cartpage")}
-
-// //------------usersarr is available inside this block-----------------------
-// //console.log(JSON.stringify(usersarr,null,2))
-
-// //user extraction by id
-//   let user = getUser(userId,usersarr);
-//   console.log(user)
-// //cart Items of particular by key;
-// let cartarr = user[0].cartItems;
-// renderCardItems(cartarr)
-// //console.log(JSON.stringify(cartarr,null,2))
-
-
-
-
-
-
-
-
-
-
-
-// }
-
-
-// function getUser(id,usersarr){
-//     //cartItems extraction
-
-
-
-// let user = usersarr.filter((item)=>{
-//     return item["id"]==id;
-// })
-//  //console.log(JSON.stringify(user,null,10))
-//  return user;
-// }
-// api end******************************************************************
-
-
-
-
-
-renderCardItems(localUserData);
-let arr = localUserData.cartItems;
-
-
-
-
-
-
-
-
-
-
-
-
-
-function renderCardItems(json){
-     let arr  = json.cartItems;
-     displayCart(arr)
-    // cartItemDiv.innerHTML= null;
-
-    
-    // cartItemDiv.innerHTML =`
-    //  ${
-    //     arr.map((item)=>{
-    //        let id = item.id;
-    //        let name = item.title;
-    //        let category = item.category;
-    //        let count =item.count;
-    //        let price = item.price *count;
-    //        let image = item.image;
-    //        let discount = item.discount;
-
-    //        //rating part starts here
-    //        let sumRating = 0;
-    //        item["rating"].forEach((item1)=>{sumRating+=item1})
-    //        let avgRating = sumRating/item["rating"].length;
-    //        //rating part starts here
-       
-    //        return cartDiv (id,name,category,count,price,image,0,discount)
-
-    //     }).join("")
-    //  }
-    // `
-//overview part
-overView.innerHTML=null;
-
-let subTotal = 0;
-let discount = 0;
-arr.forEach((item)=>{
-    subTotal+=(item.price*item.count);
-    discount+=item.discount;
-})
-let finalBeforeGST;
-if(subTotal!=0){ finalBeforeGST = subTotal-discount;}
-else{finalBeforeGST=subTotal}
-let GST  =Math.ceil(subTotal/11) ;
-let finalPrice = finalBeforeGST+GST;
-let promocodeapplied = localStorage.getItem("promoCodeApplied");
-
-localStorage.setItem("finalPrice",finalPrice);
-let deliveryCharges;
-let cashOnDelivery =localStorage.getItem("cashOnDelivery")||false;
-if(cashOnDelivery){
-deliveryCharges = (arr.length*10)+50+40;
-}
-if(subTotal>=5000){deliveryCharges=0}
-else {deliveryCharges = (arr.length*10)+50;}
-if(subTotal==0){discount=0;deliveryCharges=0}
-overView.innerHTML=`
-${getOverViewCard(subTotal,GST,finalPrice,discount,deliveryCharges  )}
-`
-
-    
-}
-
-
-
-
-function getOverViewCard(subTotal,GST,final,discount ,deliveryCharges ){
-    return `
-    
-    <h1>OVERVIEW</h1>
-   
-        <div><h3>subtotal</h3><h3>&#8377; ${subTotal}</h3></div>
-        <div><h3>Discount</h2><h3>&#8377; ${discount}</h3></div>
-        <div><h3>GST</h2><h3>&#8377; ${GST}</h3></div>
-        <div><h3>Delivery Charges</h3><h3>&#8377; ${deliveryCharges}</h2></div>
-  
-    <hr>
-    <div><h2>Final Price</h2><h2>&#8377; ${final}</h2></div>
-    
- `
-}
-
-
-//cart card factory
-function cartDiv (id,name,category,count,price,image,avgRating,discount){
-    let dummyPrice = price+200;
-    
-   
-
-    return `<div id="cartItem" >
-    <div>
-        <img  src=${image} alt="${id}">
-    </div>
-    <div>
-        <h3>${name}</h3>
-        <h3>${category}</h3>
-        <br>
-        <div>${getStars(avgRating)}</div>
-        <br>
-        <div id="button_div" >
-            <button     >-</button>
-            <button >${count}</button>
-            <button  >+</button>
-        </div>
-     data-id=${id}
-    </div>
-   
-    <div id="overview1" >
-        <h3>Price Details</h3>
-       
-            <div><h3>Original Price</h3><h3>&#8377; ${dummyPrice}</h3></div>
-            <div><h3>Discount</h3><h3>&#8377; ${discount}</h3></div>
-            
-            
-      
-        <hr>
-        <div><h3>Final Price</h3><h2>${price}</h2></div>
-        
-       </div>
-
-
-
-
-</div>`
-}
-//getstars
-//expernal function
-function getStars(rating) {
-
-    // Round to nearest half
-    rating = Math.round(rating * 2) / 2;
-    let output = [];
-  
-    // Append all the filled whole stars
-    for (var i = rating; i >= 1; i--)
-      output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
-  
-    // If there is a half a star, append it
-    if (i == .5) output.push('<i class="fa fa-star-half-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
-  
-    // Fill the empty stars
-    for (let i = (5 - rating); i >= 1; i--)
-      output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
-  
-    return output.join('');
-  
-  }
-
-
-
-
-
-
-
-
-
-//promocode
-var modal = document.getElementById("myModal");
-var span = document.getElementsByClassName("close")[0];
-
-promoCodeDiv.addEventListener("click",()=>{
-    modal.style.display = "block";
-    
-})
-span.addEventListener("click",()=>{
-    modal.style.display = "none";
-});
-
-
-//to make the close btn working outside box
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-
-
-
-  ////////////////////////////////json template making old count not added
-  let json ={
-    "id": 1,
-    "userName": "Anandhu P A",
-    "profilePic":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/985.jpg",
-    "Address" : "Anandhu P A, Perumoola(H) Kailasanadu PO Pothakkally Idukky District Kerala, Kerala Idukki, Kerala - 685553 9526332548",
-    "cartItems": [{
-        "createdAt": "2022-12-10T04:24:59.885Z",
-        "image": "https://cdn13.nnnow.com/web-images/medium/styles/6QFRWWY6GN7/1589003350410/1.jpg",
-        "category": "Perfume",
-        "title": "Oud Wood Eau De Parfum",
-        "price": 25300,
-        "rating": [5,3],
-        "discount": 5,
-        "id": "1",
-        
-        },
-        {
-        "createdAt": "2022-12-09T11:49:47.804Z",
-        "image": "https://cdn12.nnnow.com/web-images/medium/styles/SK7N1M9ICBQ/1583390837736/1.jpg",
-        "category": "Perfume",
-        "title": "Beau De Jour Eau De Parfum",
-        "price": 13600,
-        "rating": [5],
-        "discount": 5,
-        "id": "2"
-        },
-        {
-            "createdAt": "2022-12-10T07:47:57.232Z",
-            "image": "https://cdn04.nnnow.com/web-images/medium/styles/JWDVPXLPG9P/1639113646812/1.jpg",
-            "category": "Perfume",
-            "title": "Ombre Leather Parfum",
-            "price": 16000,
-            "rating": [
-            5
-            ],
-            "discount": 5,
-            "id": "4"
-            },
-        
-
-    ],
-    
-    "orders":[],
-
-    "additionalInfo":[]
-    
-  }
-
-
-//****************count **********************************
-
-let cartItemCountIncreaseBtns = document.querySelectorAll(".cartItemCountIncrease");
-let cartItemCountDecreaseBtns = document.querySelectorAll(".cartItemCountDecrease");
-
-
-//d
-//      })
-
-///appending function 
 
 
 function displayCart(arr){
@@ -404,14 +55,14 @@ function displayCart(arr){
     
     arr.forEach((item,index) => {
            let id = item.id;
-           let name = item.title;
+           let name = item.name;
            let category = item.category;
-           let count =item.count;
-           let price = item.price *count;
-           let image = item.image;
-           let discount = item.discount*count;
+           let count =item.sku[0].quantity;
+           let price = item.sku[0].price*count ;
+           let image = item.sku[0].image;
+           let discount = item.sku[0].discount*count;
            let finalPrice = price - discount;
-
+     
         //creation starts here 
         let cartItem=document.createElement("div");
         cartItem.setAttribute("id","cartItem");
@@ -469,102 +120,81 @@ function displayCart(arr){
 
         cartItemDiv.append(cartItem)
     });
+
+    overviewDisplay()
 }
 //addcount
 //addcount
 function addcount(a){
-    let larr = JSON.parse(localStorage.getItem("userdata"));
-    console.log(JSON.stringify(larr,null,2))
-    larr.cartItems.forEach((item,index)=>{
-        if(item.id==a.id){
-            item.count++
+    let larr = JSON.parse(localStorage.getItem("cart"));
+    //console.log(JSON.stringify(larr,null,2))
+    larr.forEach((item,index)=>{
+        if(item._id==a._id){
+            item.sku[0].quantity++;
         }
     });
-    displayCart(larr.cartItems);
-    renderCardItems(larr)
-    localStorage.setItem("userdata",JSON.stringify(larr))
+   
+    //renderCardItems(larr)
+    localStorage.setItem("cart",JSON.stringify(larr));
+    displayCart(larr);
     
 }
 
 /// reduce count 
 
 function reduceCount(a){
-    let larr = JSON.parse(localStorage.getItem("userdata"));
-    console.log(JSON.stringify(larr,null,2))
-   larr.cartItems.forEach((item,index)=>{
-        if(item.id==a.id){
-            item.count--;
-            if(item.count <0){item.count=0}
+    let larr = JSON.parse(localStorage.getItem("cart"));
+    //console.log(JSON.stringify(larr,null,2))
+   larr.forEach((item,index)=>{
+        if(item._id==a._id){
+            item.sku[0].quantity--;
+            if( item.sku[0].quantity <1){ item.sku[0].quantity=1}
         }
     });
-    displayCart(larr.cartItems);
-    renderCardItems(larr)
-    localStorage.setItem("userdata",JSON.stringify(larr))
+    displayCart(larr);
+    //renderCardItems(larr)
+    localStorage.setItem("cart",JSON.stringify(larr))
 }
 
 function removeItem(index){
-let larr = JSON.parse(localStorage.getItem("userdata"));
-larr.cartItems.splice(index,1)
+let larr = JSON.parse(localStorage.getItem("cart"));
+larr.splice(index,1)
 
-displayCart(larr.cartItems);
-renderCardItems(larr)
-localStorage.setItem("userdata",JSON.stringify(larr))
+
+//renderCardItems(larr)
+localStorage.setItem("cart",JSON.stringify(larr))
+displayCart(larr);
 }
-/// reduce count 
-// function addcount(a){
-//     let larr = JSON.parse(localStorage.getItem("userdata"));
-//     console.log(JSON.stringify(larr,null,2))
-//     larr.cartItems.forEach((item,index)=>{
-//         if(item.id==a.id){
-//             item.count++
-//         }
-//     });
-//     displayCart(larr.cartItems)
-//     localStorage.setItem("userdata",JSON.stringify(larr))
-    
-// }
 
-// return `<div id="cartItem" >
-//     <div>
-//         <img  src=${image} alt="${id}">
-//     </div>
 
-//     <div>
-//         <h3>${name}</h3>
-//         <h3>${category}</h3>
-//         <br>
-//         <div>${getStars(avgRating)}</div>
-//         <br>
-//         <div id="button_div" >
-//             <button     >-</button>
-//             <button >${count}</button>
-//             <button  >+</button>
-//         </div>
-//      
-//     </div>
+//overview part start __________________________________________________
+
+overviewDisplay()
+function overviewDisplay(){
+let cart = JSON.parse(localStorage.getItem("cart"));
+console.log(JSON.stringify(cart,null,5));
+let price =0;
+let discount =0;
+
+cart.forEach((item)=>{
+    price+= item.sku[0].price*item.sku[0].quantity;
+    discount += item.sku[0].discount*item.sku[0].quantity;
    
-    //  //<div id="overview1" >
-    //     <h3>Price Details</h3>
-    //         <div><h3>Original Price</h3><h3>&#8377; ${dummyPrice}</h3></div>
-    //         <div><h3>Discount</h3><h3>&#8377; ${discount}</h3></div>
-    //         <hr>
-    //     <div><h3>Final Price</h3><h2>${price}</h2></div>
-    //     </hr>
-// </div>
+})
+
+overView.innerHTML=`<h1>Info</h1>
+       
+<div><h3>subtotal</h3><h3>${price}</h3></div>
+<div><h3>GST</h2><h3>${discount}</h3></div>
+<div><h3>Delivery Charges</h3><h3>Free</h2></div>
+
+<hr>
+<div><h2>total</h2><h2>${price-discount}</h2></div>`;
 
 
 
 
-// </div>
+}
 
 
 
-// shopMoreBtn.addEventListener("click",()=>{
-//     console.log("checked")
-//      window.location.href= "../product1.html";
-// })
-
-
-const userName11 = document.querySelector("#userName11");
-const userNameCart = sessionStorage.getItem('c4raUser') || "LogIn";
-userName11.innerHTML = `${userNameCart} <i class="fa-solid fa-circle-chevron-down"> `;

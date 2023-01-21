@@ -226,3 +226,27 @@ margin-right: 20px;
 }
 
 /* navbar_end */
+
+
+
+/* cart count */
+
+
+#countBox{
+    position: relative;
+    
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+
+}
+
+#count{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: green;
+   margin-left: 4px;
+    
+}
