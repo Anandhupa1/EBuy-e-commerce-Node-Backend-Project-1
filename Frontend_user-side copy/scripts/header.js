@@ -43,4 +43,4 @@ function navbar (){
 
 `;
 }            
-navbar()
+//navbar()

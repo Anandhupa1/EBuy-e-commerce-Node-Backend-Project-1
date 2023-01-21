@@ -113,3 +113,14 @@ ________________________________________________________________________________
   }
   
 }
+
+
+addressSchema
+{
+  "shippingAddress":{
+    "city" : "form.city.value",
+        "street" : "form.street.value",
+        "houseNumber" : "form.houseNo.value",
+        "pinCode" : "form.pin.value"
+  }
+}
