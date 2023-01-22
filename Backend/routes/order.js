@@ -9,7 +9,7 @@ orderRouter.post("/",auth,async (req,res)=>{
    
    let {userId,   paymentStatus, amount,shippingAddress,  billingAddress}=req.body;
    if(!userId){res.status(401).json({err : "not authorized"})}
-   else if( !paymentStatus || !amount  || ! shippingAddress){res.status(402).json({err:"fill all the details"})}
+   else if(  !amount  || ! shippingAddress){res.status(402).json({err:"fill all the details"})}
    else{
     
     console.log("check");
@@ -25,6 +25,15 @@ orderRouter.post("/",auth,async (req,res)=>{
 orderRouter.get("/",async(req,res)=>{
     res.send("orderroutee")
 })
+
+// get user's orderes individualy
+
+orderRouter.get("/user",auth,async (req,res)=>{
+    let data = await OrderModel.findOne({userId :req.body.userId});
+    res.send(data)
+})
+
+
 
 
 

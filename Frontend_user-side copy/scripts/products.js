@@ -126,20 +126,39 @@ displayProducts(filteredData)
 
 
 function addToCart(item){
-   let cartArr = JSON.parse(localStorage.getItem("cart"))||[];
-   let itemExists=false;
-   cartArr.forEach((elem)=>{
-    if(item.name==elem.name){itemExists = true;}
-    
-   })
-   if(!itemExists){
-        item.sku[0].quantity=1;
-        cartArr.push(item);
-        localStorage.setItem("cart",JSON.stringify(cartArr));
-     // adding item to cart
-        alert("item added to cart !!!")
 
-   }
-   else{alert("item already exists in cart")}
+let authToken = localStorage.getItem("authToken");
+if(!authToken){
+  alert("login please")
+  window.location.href="./login.html"
+}
+else{
+  let cartArr = JSON.parse(localStorage.getItem("cart"))||[];
+  let itemExists=false;
+  cartArr.forEach((elem)=>{
+   if(item.name==elem.name){itemExists = true;}
+   
+  })
+  if(!itemExists){
+       item.sku[0].quantity=1;
+       cartArr.push(item);
+       localStorage.setItem("cart",JSON.stringify(cartArr));
+    // adding item to cart
+    
+
+    
+alert("item added to cart !!!")
+
+
+  }
+  else{alert("item already exists in cart")}
+
+
+}
+
+
+
+
+  
 
 }

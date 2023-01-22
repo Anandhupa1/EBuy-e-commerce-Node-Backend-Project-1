@@ -25,7 +25,7 @@ form.addEventListener("submit", async (event)=>{
     if(res.ok){
       let data = await res.json();
       let authToken = data.authToken;
-      sessionStorage.setItem("authToken", authToken);
+      localStorage.setItem("authToken", authToken);
       alert("login successfull");
       window.location.href = "./index.html";
     }

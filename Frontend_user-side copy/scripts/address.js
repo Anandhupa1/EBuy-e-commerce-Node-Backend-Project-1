@@ -10,7 +10,12 @@ setTimeout(function () {
 
 let form = document.getElementById("form");
 form.addEventListener("submit",async (e)=>{
-    e.preventDefault()
+    e.preventDefault();
+
+if(!form.city.value||!form.street.value|| !form.houseNo.value|| !form.pin.value){
+    alert("enter all fields")
+}
+else{
     let obj = {
         city : form.city.value,
         street : form.street.value,
@@ -20,23 +25,8 @@ form.addEventListener("submit",async (e)=>{
     
 //fetch 
 try{
-    let res = await fetch(`${baseUrl}/users/register`, {
-        method: 'PATCH',
-        body: JSON.stringify({
-            shippingAdress : obj
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-     if(res.ok){
-         alert("address added successfully");
-     }
-     else {
-        alert("res.ok !=true")
-     }
-
-
+await localStorage.setItem("address", JSON.stringify(obj))
+window.location.href='./shipping.html'
 
 
 }
@@ -48,6 +38,9 @@ alert("err : patch : address")
 
 
 
+}
+
+    
 
 
 })

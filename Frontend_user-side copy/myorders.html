@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyOrders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+body{
+    background: #ddd3;
+    height: 100vh;
+    vertical-align: middle;
+    display: flex;
+    font-family: Muli;
+    font-size: 14px;    
+}
+.card{
+    margin: auto;
+    width: 38%;
+    max-width:600px;
+    padding: 4vh 0;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top: 3px solid rgb(252, 103, 49);
+    border-bottom: 3px solid rgb(252, 103, 49);
+    border-left: none;
+    border-right: none;
+}
+@media(max-width:768px){
+    .card{
+        width: 90%;
+    }
+}
+.title{
+    color: rgb(252, 103, 49);
+    font-weight: 600;
+    margin-bottom: 2vh;
+    padding: 0 8%;
+    font-size: initial;
+}
+#details{
+    font-weight: 400;
+}
+.info{
+    padding: 5% 8%;
+}
+.info .col-5{
+    padding: 0;
+}
+#heading{
+    color: grey;
+    line-height: 6vh;
+}
+.pricing{
+    background-color: #ddd3;
+    padding: 2vh 8%;
+    font-weight: 400;
+    line-height: 2.5;
+}
+.pricing .col-3{
+    padding: 0;
+}
+.total{
+    padding: 2vh 8%;
+    color: rgb(252, 103, 49);
+    font-weight: bold;
+}
+.total .col-3{
+    padding: 0;
+}
+.footer{
+    padding: 0 8%;
+    font-size: x-small;
+    color: black;
+}
+.footer img{
+    height: 5vh;
+    opacity: 0.2;
+}
+.footer a{
+    color: rgb(252, 103, 49);
+}
+.footer .col-10, .col-2{
+    display: flex;
+    padding: 3vh 0 0;
+    align-items: center;
+}
+.footer .row{
+    margin: 0;
+}
+#progressbar {
+    margin-bottom: 3vh;
+    overflow: hidden;
+    color: rgb(252, 103, 49);
+    padding-left: 0px;
+    margin-top: 3vh
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: x-small;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: rgb(160, 159, 159);
+}
+
+#progressbar #step1:before {
+    content: "";
+    color: rgb(252, 103, 49);
+    width: 5px;
+    height: 5px;
+    margin-left: 0px !important;
+    /* padding-left: 11px !important */
+}
+
+#progressbar #step2:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-left: 32%;
+}
+
+#progressbar #step3:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 32% ; 
+    /* padding-right: 11px !important */
+}
+
+#progressbar #step4:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 0px !important;
+    /* padding-right: 11px !important */
+}
+
+#progressbar li:before {
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: auto;
+    z-index: -1;
+    margin-bottom: 1vh;
+}
+
+#progressbar li:after {
+    content: '';
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    margin-bottom: 2vh;
+    top: 1px;
+    z-index: 1;
+}
+.progress-track{
+    padding: 0 8%;
+}
+#progressbar li:nth-child(2):after {
+    margin-right: auto;
+}
+
+#progressbar li:nth-child(1):after {
+    margin: auto;
+}
+
+#progressbar li:nth-child(3):after {
+    float: left;
+    width: 68%;
+}
+#progressbar li:nth-child(4):after {
+    margin-left: auto;
+    width: 132%;
+}
+
+#progressbar  li.active{
+    color: black;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: rgb(223, 84, 34);
+}
+
+    </style>
+</head>
+<body>
+<!-- start_________________________ -->
+<div class="card">
+    <div class="title">Order Details</div>
+    <div class="info">
+        <div class="row">
+            <div class="col-7">
+               
+            </div>
+            <div class="col-5 pull-right">
+                <span id="heading">Order No.</span><br>
+                <span id="details"></span>
+            </div>
+        </div>      
+    </div>      
+    <div class="pricing">
+      
+        <!-- <div class="row">
+            <div class="col-9">
+                <img src="data:image/png;base64,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" alt="">
+                <span id="name">BEATS Solo 3 Wireless Headphones</span>  
+            </div>
+            <div class="col-3">
+                <span id="price">&pound;299.99</span>
+            </div>
+        </div> -->
+       
+       
+    </div>
+    <div class="total">
+         <!-- <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3"><big>&pound;262.99</big></div>
+        </div>  -->
+    </div>
+    <div class="tracking">
+        <div class="title">Tracking Order</div>
+    </div>
+    <div class="progress-track">
+        <ul id="progressbar">
+            <li class="step0 active " id="step1">Ordered</li>
+            <li class="step0  text-center" id="step2">Shipped</li>
+            <li class="step0  text-right" id="step3">On the way</li>
+            <li class="step0 text-right" id="step4">Delivered</li>
+        </ul>
+    </div>
+    
+
+    <div class="footer">
+        <div class="row">
+            <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/YBWc55P.png"></div>
+            <div class="col-10">Want any help? Please &nbsp;<a> contact us</a></div>
+        </div>
+        
+       
+    </div>
+</div>
+<!-- end___________________________ -->
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+let baseUrl = "http://localhost:4500";
+async function getOrders(){
+let res = await fetch(`${baseUrl}/orders/user`, {
+  method: 'GET',
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+    'authToken' :localStorage.getItem("authToken")
+  },
+});
+let data = await res.json();
+displayPro(data.items)
+console.log(data);
+let detailsdiv = document.querySelector("#details");
+detailsdiv.innerHTML = data._id;
+let priceDiv = document.querySelector(".total");
+priceDiv.innerHTML=`Total : ${data.amount}`;
+
+}
+
+getOrders();
+
+
+function displayPro(arr){
+let div12 = document.querySelector(".pricing")
+arr.forEach((item)=>{
+    let subdiv = document.createElement("div");
+    subdiv.innerHTML=`<div class="row">
+            <div class="col-9">
+                <img src=${item.sku[0].image} alt="">
+                <span id="name">${item.name}</span>  
+            </div>
+            <div class="col-3">
+                <span id="price">Rs . ${item.sku[0].price}</span>
+            </div>
+        </div>`
+
+    div12.append(subdiv);
+});
+
+
+
+}
+
+
+
+
+
+</script>
+</html>
