@@ -57,7 +57,16 @@ regRouter.put('/',auth,async (req,res)=>{
    
 });
 
-
+regRouter.get("/",async (req,res)=>{
+    try{
+           let data = await UserModel.find();
+           res.send(data)
+    }
+    catch(err){
+        console.log("err ; get :users")
+        console.log(err)
+    }
+})
 
 
 

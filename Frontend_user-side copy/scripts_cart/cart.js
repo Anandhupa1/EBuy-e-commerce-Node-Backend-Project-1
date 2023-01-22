@@ -33,11 +33,11 @@ let promoCodeDiv = document.getElementById("promocode");
 
 //checkOutBtn
 checkOutBtn.addEventListener("click",()=>{
-    window.location.replace("../shipping.html")
+    window.location.href ='./address.html';
 });
 //shopMoreBtn 
 shopMoreBtn.addEventListener("click",()=>{
-    window.location.replace("../product1.html")
+    window.location.href="./products.html";
 });
 
 //___________________________________________________________________________
@@ -120,7 +120,6 @@ function displayCart(arr){
 
         cartItemDiv.append(cartItem)
     });
-
     overviewDisplay()
 }
 //addcount

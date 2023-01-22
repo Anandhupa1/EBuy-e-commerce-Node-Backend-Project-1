@@ -23,7 +23,110 @@ continueBtn.addEventListener("click",()=>{
 //******************************************** */
 ///main part starts
 
-renderCardItems(localUserData)
+
+let cartItems = JSON.parse(localStorage.getItem("cart"));
+console.log(JSON.stringify(cartItems,null,3))
+displayCart(cartItems)
+
+
+
+
+
+function displayCart(arr){
+    cartItemDiv.innerHTML= null;
+    
+    arr.forEach((item,index) => {
+           let id = item.id;
+           let name = item.name;
+           let category = item.category;
+           let count =item.sku[0].quantity;
+           let price = item.sku[0].price*count ;
+           let image = item.sku[0].image;
+           let discount = item.sku[0].discount*count;
+           let finalPrice = price - discount;
+     
+        //creation starts here 
+        let cartItem=document.createElement("div");
+        cartItem.setAttribute("id","cartItem");
+        let div1 = document.createElement("div");
+        let img = document.createElement("img");
+        img.setAttribute("src",image)
+        div1.append(img);
+        cartItem.append(div1);
+
+        let div2 = document.createElement("div");
+         let h31 = document.createElement("h3");
+         h31.innerText=name;
+         let h32 = document.createElement("h3");
+         h32.innerText=category;
+         h32.style.color="#777272"
+         let br = document.createElement("br") ;
+         
+        
+           
+        div2.append(h31,h32,br);
+        cartItem.append(div2)
+
+
+
+        let div3 = document.createElement("div");
+        div3.setAttribute("id","overview1")
+        div3.innerHTML=` <h3><i class="fa-solid fa-truck"></i></h3>
+               
+        <div><h3> <i class="fa-regular fa-circle-dot"></i>Delivery within 3 - 7 days</h3></div>
+       
+        `
+        cartItem.append(div3)
+
+        
+
+
+
+
+
+        cartItemDiv.append(cartItem)
+    });
+
+    overviewDisplay()
+}
+
+
+// overview 
+
+
+
+overviewDisplay()
+function overviewDisplay(){
+let cart = JSON.parse(localStorage.getItem("cart"));
+console.log(JSON.stringify(cart,null,5));
+let price =0;
+let discount =0;
+
+cart.forEach((item)=>{
+    price+= item.sku[0].price*item.sku[0].quantity;
+    discount += item.sku[0].discount*item.sku[0].quantity;
+   
+})
+
+overView.innerHTML=`<h1>Info</h1>
+       
+<div><h3>subtotal</h3><h3>${price}</h3></div>
+<div><h3>GST</h2><h3>${discount}</h3></div>
+<div><h3>Delivery Charges</h3><h3>Free</h2></div>
+
+<hr>
+<div><h2>total</h2><h2>${price-discount}</h2></div>`;
+
+
+
+
+}
+
+
+
+
+
+
 
 
 
@@ -31,125 +134,8 @@ renderCardItems(localUserData)
 
 ///main part ends
 
-
-
-
-
-function renderCardItems(json){
-    let arr  = json.cartItems;
-    //displayCart(arr)
-   cartItemDiv.innerHTML= null;
-
-   
-   cartItemDiv.innerHTML =`
-    ${
-       arr.map((item)=>{
-          let id = item.id;
-          let name = item.title;
-          let category = item.category;
-          let count =item.count;
-          let price = item.price *count;
-          let image = item.image;
-          let discount = item.discount;
-
-          //rating part starts here
-          let sumRating = 0;
-          item["rating"].forEach((item1)=>{sumRating+=item1})
-          let avgRating = sumRating/item["rating"].length;
-          //rating part starts here
-      
-          return cartDiv (id,name,category,count,price,image,0,discount)
-
-       }).join("")
-    }
-   `
-//overview part
-overView.innerHTML=null;
-
-let subTotal = 0;
-let discount = 0;
-arr.forEach((item)=>{
-   subTotal+=(item.price*item.count);
-   discount+=item.discount;
-})
-let finalBeforeGST;
-if(subTotal!=0){ finalBeforeGST = subTotal-discount;}
-else{finalBeforeGST=subTotal}
-let GST  =Math.ceil(subTotal/11) ;
-let finalPrice = finalBeforeGST+GST;
-let promocodeapplied = localStorage.getItem("promoCodeApplied");
-
-localStorage.setItem("finalPrice",finalPrice);
-let deliveryCharges;
-let cashOnDelivery =localStorage.getItem("cashOnDelivery")||false;
-if(cashOnDelivery){
-deliveryCharges = (arr.length*10)+50+40;
-}
-if(subTotal>=5000){deliveryCharges=0}
-else {deliveryCharges = (arr.length*10)+50;}
-if(subTotal==0){discount=0;deliveryCharges=0}
-
-overView.innerHTML=`
-${getOverViewCard(subTotal,GST,finalPrice,discount,deliveryCharges  )}
-`
-
-   
-}
-
-
-function getOverViewCard(subTotal,GST,final,discount ,deliveryCharges ){
-    return `
-    
-    <h1>OVERVIEW</h1>
-   
-        <div><h3>subtotal</h3><h3>&#8377; ${subTotal}</h3></div>
-        <div><h3>Discount</h2><h3>&#8377; ${discount}</h3></div>
-        <div><h3>GST</h2><h3>&#8377; ${GST}</h3></div>
-        <div><h3>Delivery Charges</h3><h3>&#8377; ${deliveryCharges}</h2></div>
-  
-    <hr>
-    <div><h2>Final Price</h2><h2>&#8377; ${final}</h2></div>
-    
- `
-}
-
-function cartDiv (id,name,category,count,price,image,avgRating,discount){
-    
-
-    return `<div id="cartItem" >
-    <div>
-        <img  src=${image} alt= id of item = ${id}>
-    </div>
-    <div>
-        <h3>${name}</h3>
-        <h3>${category}</h3>
-        
-        <h2>&#8377; ${price}</h2>
-
-    </div>
-    
-    <div id="overview1" >
-        <h3><i class="fa-solid fa-truck"></i></h3>
-       
-            <div><h3> <i class="fa-regular fa-circle-dot"></i>Delivery within 3 - 7 days</h3></div>
-            
-            
-        
-    </div>
-
-
-
-
-</div>`
-}
-
-
 let paymentBtn = document.querySelector(".payment-btn");
 paymentBtn.addEventListener("click",()=>{
   window.location.href ="./payment.html";
 })
 
-// id2
-const userName111 = document.querySelector("#id2");
-const userNameCart1 = sessionStorage.getItem('c4raUser') || "LogIn";
-userName111.innerHTML =  `${userNameCart1} <i class="fa-solid fa-circle-chevron-down"> `

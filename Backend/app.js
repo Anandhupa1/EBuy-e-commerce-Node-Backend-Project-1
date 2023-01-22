@@ -17,7 +17,7 @@ const { orderRouter } = require('./routes/order.js');
  app.use(express.json());
 //______________________________________________________________
 
-app.get('/',auth, function(req, res) {
+app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, './views/index.html'));
   });
 
@@ -25,7 +25,7 @@ app.get('/',auth, function(req, res) {
  app.use("/users/login",loginRouter);
  app.use("/products",productRouter);
  app.use("/orders",orderRouter);
-
+//  app.use("/users/order",)
 // app.use('/notes',noteRoute)
 
 
