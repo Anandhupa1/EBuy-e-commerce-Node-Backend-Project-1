@@ -3,8 +3,8 @@
 
 function navbar (){
     let nav = document.querySelector('nav');
-    nav.innerHTML=`<div id="logo1" >
-    <a href="./home.html">
+    nav.innerHTML=`  <div id="logo1" >
+    <a href="./index.html">
         <img   src="./images/logo.png" alt="EBuy_logo">
     </a>
   
@@ -25,6 +25,7 @@ function navbar (){
         <li><a href="./products.html">Products</a></li>
         <li><a href="./login.html">login</a></li>
         <li><a href="./signup.html">signUp</a></li>
+        <li><a href="./myorders.html">MyOrders</a></li>
         <!-- <li><a href="">Testimonial</a></li>
         <li><a href="#">Contact</a></li> -->
     </ul>
@@ -32,15 +33,25 @@ function navbar (){
    
     </div>
     <div class="navIcons">
-        <h1><span class="material-symbols-outlined">
+        <a href="./cart.html">
+        <div id="countBox" ><span class="material-symbols-outlined">
             shopping_bag
-            </span></h1>
-      
-        <h3><span class="material-symbols-outlined">
+            </span>
+            <h4 id="count" >0</h4>
+        </div>
+        </a>
+        <a href="./search.html">
+        <div><span class="material-symbols-outlined">
             search
-            </span></h3>
+            </span></div>
+        </a>
     </div>
 
+
+
 `;
-}            
-//navbar()
+}     
+
+
+
+navbar()

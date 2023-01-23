@@ -1,4 +1,4 @@
-let baseUrl = "http://localhost:4500"
+let baseUrl = "https://jittery-erin-cockroach.cyclic.app"
 
 
 //collapsible starts here
