@@ -32,7 +32,7 @@
 
     <nav class="navbar">
         <div id="logo1" >
-            <a href="./home.html">
+            <a href="./index.html">
                 <img   src="./images/logo.png" alt="EBuy_logo">
             </a>
           
@@ -53,6 +53,7 @@
                 <li><a href="./products.html">Products</a></li>
                 <li><a href="./login.html">login</a></li>
                 <li><a href="./signup.html">signUp</a></li>
+                <li><a href="./myorders.html">MyOrders</a></li>
                 <!-- <li><a href="">Testimonial</a></li>
                 <li><a href="#">Contact</a></li> -->
             </ul>
@@ -64,7 +65,7 @@
                 <div id="countBox" ><span class="material-symbols-outlined">
                     shopping_bag
                     </span>
-                    <h4 id="count" >7</h4>
+                    <h4 id="count" >0</h4>
                 </div>
                 </a>
                 <a href="./search.html">
@@ -94,31 +95,31 @@
 <div class="products">
    
     <div>
-        <a href="./products">
+        <a href="./products.html">
             <img src="https://images.dailyobjects.com/marche/assets/images/other/collection-08-01.jpg?tr=cm-pad_crop,v-2,w-421,dpr-1" alt="">
         </a>
         
         <h2>08:01 COLLECTION</h2>
         <p>Features a range of chroniclers that let you preserve all brief encounters on your journey.</p>
-        <a href="./products">shop now</a>
+        <a href="./products.html">shop now</a>
     </div>
     <div>
-        <a href="./products">
+        <a href="./products.html">
             <img src="https://images.dailyobjects.com/marche/assets/images/other/zootopia-Web.jpg?tr=cm-pad_crop,v-2,w-421,dpr-1" alt="">
         </a>
         
         <h2>DAILYOBJECTS X SMARTSTERS</h2>
         <p>Urban-inspired carriers, made for free-spirited and powerful wearers.</p>
-        <a href="./products">shop now</a>
+        <a href="./products.html">shop now</a>
     </div>
     <div>
-        <a href="./products">
+        <a href="./products.html">
             <img src="https://images.dailyobjects.com/marche/assets/images/other/collection-tarp.jpg?tr=cm-pad_crop,v-2,w-421,dpr-1" alt="">
         </a>
         
         <h2>TARP COLLECTION</h2>
         <p>Urban-inspired carriers, made for free-spirited and powerful wearers.</p>
-        <a href="./products">shop now</a>
+        <a href="./products.html">shop now</a>
     </div>
 </div>
 
@@ -144,29 +145,16 @@
 
 <!-- //swiper -->
 <div id="swiperHalf" class="swiper mySwiper">
-  <div class="swiper-wrapper">
-    
+  <div id="displayDiv" class="swiper-wrapper">
+<!--     
      <div class="swiper-slide">
         
             <img  src="https://images.dailyobjects.com/marche/assets/images/other/crossbody-ups.jpg?tr=cm-pad_crop,v-2,w-874,dpr-1" alt="">
             <a href="./products.html">
             <p>CrossBody bags</p>
             </a>
-    </div>
-    <div class="swiper-slide">
-        
-        <img  src="https://images.dailyobjects.com/marche/assets/images/other/crossbody-ups.jpg?tr=cm-pad_crop,v-2,w-874,dpr-1" alt="">
-        <a href="./products.html">
-        <p>CrossBody bags</p>
-        </a>
-    </div>
-    <div class="swiper-slide">
-        
-        <img  src="https://images.dailyobjects.com/marche/assets/images/other/crossbody-ups.jpg?tr=cm-pad_crop,v-2,w-874,dpr-1" alt="">
-        <a href="./products.html">
-        <p>CrossBody bags</p>
-        </a>
-    </div>
+    </div> -->
+    
    
    
 
@@ -243,6 +231,7 @@ You can look forward to a carefully-crafted range of products, made from long-la
 
 
 <!-- body end -->
+<script src="./scripts/index.js"></script>
 <script src="./scripts/header.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="./scripts/"></script>
@@ -304,6 +293,25 @@ You can look forward to a carefully-crafted range of products, made from long-la
 
 
 );
+
+//cart count display
+let cdis = document.getElementById("count");
+let larr = JSON.parse(localStorage.getItem("cart"));
+let c = larr.length || 0;
+cdis.innerText= c;
+
+
+// fetch and swipe
+
+
+
+
+
+
+
+
+
+
 </script>
 
 </html>

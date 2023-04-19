@@ -3,7 +3,7 @@
 //     document.querySelector(".container").style.display = "block";
 //   }, 1000);
 
-let baseUrl = "http://localhost:4500"
+let baseUrl = "https://jittery-erin-cockroach.cyclic.app"
 
   async function getProducts(){
     let res = await fetch(`${baseUrl}/products`, {
@@ -14,7 +14,7 @@ let baseUrl = "http://localhost:4500"
       });
 if(res.ok){
     let data = await res.json();
-    console.log(JSON.stringify(data[0],null,2));
+    //console.log(JSON.stringify(data[0],null,2));
     ///////////////////////////////////////////////////////////////
     
     displayProducts(data);
@@ -25,6 +25,9 @@ if(res.ok){
 
 
     ///////////////////////////////////////////////////////////////
+    //search funcionality
+    search(data)
+ 
 }
 else{alert("error:res.ok!=true")}
 
@@ -161,4 +164,20 @@ alert("item added to cart !!!")
 
   
 
+}
+
+
+
+function search(data){
+  let inputTag = document.querySelector("#searchP");
+  let productsDiv = document.getElementById("products");
+
+  inputTag.addEventListener("change",(e)=>{
+    e.preventDefault()
+    // let fd= data.filter((item)=>{
+    //   return item.name.toLowerCase().includes(inputTag.value.toLowerCase());
+    //   displayProducts(fd)
+    // });
+    console.log(data)
+  })
 }

@@ -1,10 +1,8 @@
-let baseUrl = 'http://localhost:4500'
-
+let baseUrl = 'https://jittery-erin-cockroach.cyclic.app'
 setTimeout(function () {
     document.querySelector(".preloader").style.display = "none";
     document.querySelector(".container").style.display = "block";
   }, 1000);
-
 
 let form = document.getElementById("form");
 form.addEventListener("submit", async (event)=>{
@@ -12,10 +10,13 @@ form.addEventListener("submit", async (event)=>{
   try{
     let obj = {
       email : form.email.value,
-      password : form.password.value
+      password : form.pw.value,
+      cpassword  :form.cpw.value,
+      userName : form.name.value
     }
+    console.log(obj)
 
-    let res = await fetch(`${baseUrl}/users/login`, {
+    let res = await fetch(`${baseUrl}/users/register`, {
       method: 'POST',
       body: JSON.stringify(obj),
       headers: {
@@ -25,13 +26,16 @@ form.addEventListener("submit", async (event)=>{
     if(res.ok){
       let data = await res.json();
       let authToken = data.authToken;
-      localStorage.setItem("authToken", authToken);
-      alert("login successfull");
-      window.location.href = "./index.html";
+      sessionStorage.setItem("authToken", authToken);
+      alert("registered succesfully");
+      window.location.href = "./login.html";
     }
     else {
-     if(res.status==404){alert("user doesn't exists, register please")}
-     else if(res.status==401){alert("wrong password")}
+     if(res.status==409){
+        alert("user already exists, login please");
+        window.location.href = "./login.html";
+    }
+     else if(res.status==401){alert(" password not matching")}
     }
 
 
