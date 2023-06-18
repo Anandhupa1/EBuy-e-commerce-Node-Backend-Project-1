@@ -1,3 +1,22 @@
-# EBuy-e-commerce-Node-Backend-Project-1
-E commerce website | Node backend project 1
-"C:\Users\HP\Documents\EBuy_Node_Backend_Project1\EBuy-e-commerce-Node-Backend-Project-1\Ebuy_mindmeister.png"
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">EBuy </h3>
+
+  <p align="center">
+   MERN Stack e-commerce web application
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Live Demo »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">Server side documentation</a>
+    ·
+   <a href="https://github.com/othneildrew/Best-README-Template/issues">Client side documentation</a>
+   <!--   ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a> -->
+  </p>
+</div>
