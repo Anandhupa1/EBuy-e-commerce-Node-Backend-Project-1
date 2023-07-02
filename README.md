@@ -56,10 +56,12 @@
 ```graphql
 
 - Project
-    ├── Frontend (React App) # New updated version made with react , chakra UI, redux etc.
-    └── Frontend (old version) # old version made with HTML,CSS and JS
+    ├── Frontend
+    │   ├── Frontend (React App)  # New updated version made with React, Chakra UI, Redux, etc.
+    │   └── Frontend (old version)  # Old version made with HTML, CSS, and JS
     ├── BackEnd
     └── README.md
+
 ```
 
 
