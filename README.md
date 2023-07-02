@@ -55,18 +55,11 @@
 
 ```graphql
 
-./src/* 
-  ├─ src/assets - # Minified images, fonts, icon files
-  ├─ src/components - # Individual smaller components
-  ├─ src/fragments - # Larger chunks of a page composed of multiple components
-  ├─ src/layouts - # Page layouts used for different types of pages composed of components and fragments
-  ├─ src/page - # Custom pages or pages composed of layouts with hardcoded data components, fragments, & layouts
-  ├─ src/pages/* - # Next.js file based routing
-  │  ├─ _app.js - # next.js app entry point
-  │  ├─ _document.js - # next.js document wrapper
-  │  ├─ global.css - #  Global CSS styles
-  │  └─ Everything else... - # File based routing
-  └─ src/utils - # Utility functions used in various places
+- Project
+    ├── Frontend (React App) # New updated version made with react , chakra UI, redux etc.
+    └── Frontend (old version) # old version made with HTML,CSS and JS
+    ├── BackEnd
+    └── README.md
 ```
 
 
