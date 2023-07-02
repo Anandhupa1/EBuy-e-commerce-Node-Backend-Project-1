@@ -65,6 +65,19 @@
 ```
 
 
+| Home page                                    | Login page                                     |
+|----------------------------------------------|----------------------------------------------|
+| ![Login Page ](https://static.vecteezy.com/system/resources/previews/002/774/578/original/designer-working-on-web-project-work-illustration-concept-free-vector.jpg)   | ![Signup Page](https://static.vecteezy.com/system/resources/previews/002/774/578/original/designer-working-on-web-project-work-illustration-concept-free-vector.jpg)   |
+
+|  cart page                                   | Product page                  |
+|----------------------------------------------|----------------------------------------------|
+| ![products page](https://img.freepik.com/free-vector/app-development-illustration_52683-47743.jpg)   | ![cart page](https://img.freepik.com/free-vector/app-development-illustration_52683-47743.jpg)   |
+
+
+
+
+
+
 
 <div align="center">
   <h3 align="center">Acknowledgements</h3>
