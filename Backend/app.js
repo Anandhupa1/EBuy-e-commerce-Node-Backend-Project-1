@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const cookieParser = require("cookie-parser");
 const {UserModel}=require('./models/user.model.js');
 const {connection}=require('./config/connection')
 const {regRouter}=require('./routes/register.js');
@@ -12,12 +13,14 @@ const { productModel } = require('./models/products.model.js');
 const { productRouter } = require('./routes/product.js');
 const {auth}=require('./middlewares/auth');
 const { orderRouter } = require('./routes/order.js');
+const { googleRouter } = require('./routes/googleoAuth.js');
 
  app.use(cors())
  app.use(express.json());
+ app.use(cookieParser());
 //______________________________________________________________
 
-app.get('/', function(req, res) {
+app.get('/',auth, function(req, res) {
     res.sendFile(path.join(__dirname, './views/index.html'));
   });
 
@@ -25,11 +28,26 @@ app.get('/', function(req, res) {
  app.use("/users/login",loginRouter);
  app.use("/products",productRouter);
  app.use("/orders",orderRouter);
-//  app.use("/users/order",)
-// app.use('/notes',noteRoute)
-
-
+ app.use("/auth/google",googleRouter) ; //google oAuth route
 //server_________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.listen(process.env.port,async ()=>{
    try{
     await connection;

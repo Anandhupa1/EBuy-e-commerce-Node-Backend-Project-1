@@ -12,14 +12,20 @@ loginRouter.post('/',async (req,res)=>{
 
 
     try{
-      
+        
         let mdata =await UserModel.findOne({email : email});
         if(!mdata){res.status(404).json({error:"user doesn't exists,please register"})}
         else{
            
            const val = await bcrypt.compare(password,mdata.password);
            const  token = jwt.sign({ userId: mdata._id }, 'masai');
-           val?res.status(200).json({message:"login succes",authToken:token}):res.status(401).json({error:"wrong password"})
+           //val?(res.status(200).json({message:"login succes",authToken:token}):res.status(401).json({error:"wrong password"})
+           if(val){
+            res.cookie("authToken",token);
+            res.send("login successfull")
+           }else{
+            res.status(401).json({msg:"login failed , please try again with a registered account"})
+           }
         }
 
 

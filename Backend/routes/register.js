@@ -7,7 +7,7 @@ const{ auth} = require('../middlewares/auth');
 
 regRouter.post('/',async (req,res)=>{
     let {userName,email,DOB,role,location,password,cpassword}=req.body;
-    if(password!=cpassword){res.status(401).json({error:"please fill password corretcly"})}
+    if(password!==cpassword){res.status(401).json({error:"please fill password correctly"})}
     else if(!userName|| !email || !password || !cpassword){
         res.status(422).json({error:"Please fill all the fields"});
     }
