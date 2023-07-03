@@ -6,8 +6,9 @@ const jwt = require('jsonwebtoken');
 const auth = async (req,res,next)=>{
 /////////////////////////
 //console.log(req.method)
-let incToken = req.headers.authtoken;
-
+//let incToken = req.headers.authtoken;
+let incToken = req.cookies.authToken;
+console.log(incToken,"token")
 await jwt.verify(incToken, 'masai', function(err, decoded) {
   
   console.log(decoded.userId,"decoded");
