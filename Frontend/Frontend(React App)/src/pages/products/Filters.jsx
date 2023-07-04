@@ -1,11 +1,18 @@
-import React from 'react'
-import { GridItem,Stack,Heading,Checkbox, Box, Button,Text,Image,P, SimpleGrid } from '@chakra-ui/react'
+
+import { CheckCircleIcon } from '@chakra-ui/icons';
+import { GridItem,Input,Stack,Heading,Checkbox, Box, Button,Text,Image,P, SimpleGrid } from '@chakra-ui/react'
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import fetchProducts from "./fetchProducts"
+
+
+
 function Filters() {
   return (
      <GridItem display={"flex"} justifyContent={"space-between"} flexDir={"column"}  area={'filter'}>
-     <Categories/>
+     <Categories1/>
      <Subfilter/>
-     <Tags/>
+     {/* <Tags/> */}
      <Random/>
      </GridItem>
 
@@ -31,7 +38,7 @@ function Subfilter(){
     <Stack p={"4"} width={"100%"} mt={"20px"} height={"auto"} className='boxShadow' borderRadius={"10px"} >
      <Heading color={"black"} fontWeight={900} fontSize={"17px"}>Filter By</Heading>
      
-     <Heading mt={"2"} mb={"2"} fontSize={"15px"} >Availability</Heading>
+     <Heading mt={"2"} mb={"2"} fontSize={"15px"} >Price</Heading>
      <Stock/>
      <Heading mt={"2"} mb={"2"}fontSize={"15px"} >color</Heading>
      <Colors/>
@@ -60,21 +67,54 @@ function Colors(){
 function Stock(){
   return(
     <Stack>
-      <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>In stock(5)</Checkbox>
-      <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>Out of stock(4)</Checkbox>
+      <Checkbox fontSize={"10px"} colorScheme='red' value='naruto'>below 500</Checkbox>
+      <Checkbox fontSize={"10px"} colorScheme='red' value='naruto'>500 to 1000</Checkbox>
+      <Checkbox mb={4} fontSize={"10px"} colorScheme='red' value='naruto'>above 1000</Checkbox>
+      
+      {/* select a price range */}
+      <label htmlFor="">or select a price range</label>
+      <Stack display={"flex"} flexDir={"row"} width={"100%"}>
+      <Input placeholder='min' type='number'/>
+      <Input placeholder='max' type='number'/>
+      <Button ><CheckCircleIcon/></Button>
+      </Stack>
+      
+      
     </Stack>
   )
 }
 
-function Tags(){
+function Categories1(){
+  //dealing with query params__________________________________________________
+  const queryParams = new URLSearchParams(location.search);
+  const navigate = useNavigate();
+
+  function appendQuery(q,v){ //_________function for updating the data of query param
+   
+   queryParams.set(q, v);
+   navigate(`?${queryParams.toString()}`);
+  //_______________________________________________________________________
+  }
+  
+  // function fetchProducts(){
+  //   alert(queryParams.toString())
+  // }
+  
+
   return(
     
     <Stack className='boxShadow' borderRadius={"10px"} mt={2} width={"100%"} p={3}  height={"auto"} >
-    <Heading color={"black"} fontSize={"15px"}>Tags</Heading>
+    <Heading color={"black"} fontSize={"15px"}>Categories</Heading>
     <Stack display={"flex"} flexWrap={"wrap"} flexDir={"row"} >
-    <Button>tag sdf asdf</Button>
-    <Button>tag</Button>
-    <Button>tag</Button>
+    <Button onClick={(e)=>{appendQuery("category",e.target.innerText)}}>any </Button>
+    <Button onClick={(e)=>{appendQuery("category",e.target.innerText)}}>anandhu </Button>
+    <Button>indor plants</Button>
+    <Button>laptop</Button>
+
+    {/* dummy button for alert */}
+    <Button onClick={fetchProducts}>alert query</Button>
+    
+    
     
     </Stack>
     
@@ -120,13 +160,27 @@ function Random(){
 
 
 function Size (){
+//dealing with query params__________________________________________________
+const queryParams = new URLSearchParams(location.search);
+const navigate = useNavigate();
+
+function appendQuery(q,v){ //_________function for updating the data of query param
+ 
+ queryParams.set(q, v);
+ navigate(`?${queryParams.toString()}`);
+//_______________________________________________________________________
+}
+
+
+
+
   return (
     <Stack display={"flex"} >
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>S(10)</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>M(3)</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>L(5)</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>XL</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>XXL</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={true} fontSize={"15px"} colorScheme='red' value='S'>S(20)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={true} fontSize={"15px"} colorScheme='red' value='M'>M(3)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='L'>L(5)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='XL'>XL</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='XXL'>XXL</Checkbox>
     
     </Stack>
   )
