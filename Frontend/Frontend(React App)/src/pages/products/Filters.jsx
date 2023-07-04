@@ -1,8 +1,9 @@
-import React from 'react'
+
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import { GridItem,Input,Stack,Heading,Checkbox, Box, Button,Text,Image,P, SimpleGrid } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import fetchProducts from "./fetchProducts"
 
 
 
@@ -66,9 +67,9 @@ function Colors(){
 function Stock(){
   return(
     <Stack>
-      <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>below 500</Checkbox>
-      <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>500 to 1000</Checkbox>
-      <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>above 1000</Checkbox>
+      <Checkbox fontSize={"10px"} colorScheme='red' value='naruto'>below 500</Checkbox>
+      <Checkbox fontSize={"10px"} colorScheme='red' value='naruto'>500 to 1000</Checkbox>
+      <Checkbox mb={4} fontSize={"10px"} colorScheme='red' value='naruto'>above 1000</Checkbox>
       
       {/* select a price range */}
       <label htmlFor="">or select a price range</label>
@@ -84,18 +85,21 @@ function Stock(){
 }
 
 function Categories1(){
-  const queryParams = new URLSearchParams();
+  //dealing with query params__________________________________________________
+  const queryParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
-  // queryParams.append('category', selectedCategory);
-  // queryParams.append('price', selectedPrice);
-  // const link = `/product?${queryParams.toString()}`;
-  function appendQuery(q,v){
-   queryParams.append(q,v);
-   
-   navigate(`?${queryParams.toString()}`);
-  //  alert("appended")
-  }
 
+  function appendQuery(q,v){ //_________function for updating the data of query param
+   
+   queryParams.set(q, v);
+   navigate(`?${queryParams.toString()}`);
+  //_______________________________________________________________________
+  }
+  
+  // function fetchProducts(){
+  //   alert(queryParams.toString())
+  // }
+  
 
   return(
     
@@ -103,11 +107,14 @@ function Categories1(){
     <Heading color={"black"} fontSize={"15px"}>Categories</Heading>
     <Stack display={"flex"} flexWrap={"wrap"} flexDir={"row"} >
     <Button onClick={(e)=>{appendQuery("category",e.target.innerText)}}>any </Button>
+    <Button onClick={(e)=>{appendQuery("category",e.target.innerText)}}>anandhu </Button>
     <Button>indor plants</Button>
     <Button>laptop</Button>
-    <Button>outdoor plants</Button>
+
+    {/* dummy button for alert */}
+    <Button onClick={fetchProducts}>alert query</Button>
     
-    <Button>iphone</Button>
+    
     
     </Stack>
     
@@ -153,13 +160,27 @@ function Random(){
 
 
 function Size (){
+//dealing with query params__________________________________________________
+const queryParams = new URLSearchParams(location.search);
+const navigate = useNavigate();
+
+function appendQuery(q,v){ //_________function for updating the data of query param
+ 
+ queryParams.set(q, v);
+ navigate(`?${queryParams.toString()}`);
+//_______________________________________________________________________
+}
+
+
+
+
   return (
     <Stack display={"flex"} >
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>S(10)</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>M(3)</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>L(5)</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>XL</Checkbox>
-    <Checkbox fontSize={"15px"} colorScheme='red' value='naruto'>XXL</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={true} fontSize={"15px"} colorScheme='red' value='S'>S(20)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={true} fontSize={"15px"} colorScheme='red' value='M'>M(3)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='L'>L(5)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='XL'>XL</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='XXL'>XXL</Checkbox>
     
     </Stack>
   )
