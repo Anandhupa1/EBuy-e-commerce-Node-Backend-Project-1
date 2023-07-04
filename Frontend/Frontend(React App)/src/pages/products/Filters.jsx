@@ -2,8 +2,10 @@
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import { GridItem,Input,Stack,Heading,Checkbox, Box, Button,Text,Image,P, SimpleGrid } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
 import fetchProducts from "./fetchProducts"
+import { useSelector } from 'react-redux';
+
 
 
 
@@ -51,31 +53,57 @@ function Subfilter(){
 
 
 function Colors(){
+ 
+  const navigate = useNavigate();
   let arr = ["pink.500","blue.700","gray.500","blue.100","yellow.300","orange.700","green","gold","black","gray.300"]
+  function appendQuery(q,v){ //_________function for updating the data of query param
+    const queryParams = new URLSearchParams(location.search);
+   queryParams.set(q, v);
+   navigate(`?${queryParams.toString()}`);
+  //_______________________________________________________________________
+  }
   return(
     <SimpleGrid gap={1.5}  minChildWidth={"20px"} width={"100%"}  height={"50%"}>
-     <GridItem as={"Button"} value="#ffff" cursor={"pointer"} onClick={(e)=>{alert(e.target.value)}}  borderRadius={"50%"} height={"20px"} bgColor={"pink.400"}></GridItem>
-     <GridItem as={"Button"} value="#ffff" cursor={"pointer"} onClick={(e)=>{alert(e.target.value)}} borderRadius={"50%"} height={"20px"} bgColor={"blue.500"}></GridItem>
-      <GridItem as={"Button"} value="#ffff" cursor={"pointer"} onClick={(e)=>{alert(e.target.value)}} borderRadius={"50%"} height={"20px"} bgColor={"red"}></GridItem>
+     <GridItem as={"Button"} value={false} cursor={"pointer"} onClick={(e)=>{appendQuery("color",e.target.value)}}  borderRadius={"50%"} height={"20px"} borderWidth={"1px"} color={"gray.900"} borderColor={"gray.900"} fontSize={"10px"} >all</GridItem>
+     
      {arr.map((item,i)=>{
-      return <GridItem key={i} as={"Button"} value="#ffff" cursor={"pointer"} onClick={(e)=>{alert(e.target.value)}} borderRadius={"50%"} height={"20px"} bgColor={item}></GridItem>
+      return <GridItem key={i} as={"Button"} value="ffff" cursor={"pointer"} onClick={(e)=>{appendQuery("color",e.target.value)}} borderRadius={"50%"} height={"20px"} bgColor={item}></GridItem>
     
      })}
      </SimpleGrid>
   )
 }
 function Stock(){
+  const [pmin,setPmin]=useState("");
+  const [pmax,setPmax]=useState("");
+  useEffect(()=>{
+    const queryParams = new URLSearchParams(location.search);
+    const pmin = queryParams.get("pmin");
+    const pmax = queryParams.get("pmax");
+    setPmin(pmin);
+    setPmax(pmax);
+  },[location.search]);
+ 
+  
+  const navigate = useNavigate();
+  let arr = ["pink.500","blue.700","gray.500","blue.100","yellow.300","orange.700","green","gold","black","gray.300"]
+  function appendQuery(q,v){ //_________function for updating the data of query param
+    const queryParams = new URLSearchParams(location.search);
+   queryParams.set(q, v);
+   navigate(`?${queryParams.toString()}`);
+  //_______________________________________________________________________
+  }
   return(
     <Stack>
-      <Checkbox fontSize={"10px"} colorScheme='red' value='naruto'>below 500</Checkbox>
-      <Checkbox fontSize={"10px"} colorScheme='red' value='naruto'>500 to 1000</Checkbox>
-      <Checkbox mb={4} fontSize={"10px"} colorScheme='red' value='naruto'>above 1000</Checkbox>
+      <Checkbox onChange={(e)=>{appendQuery("pmin",0);appendQuery("pmax",500)}} isChecked={pmin==0&&pmax==500} fontSize={"10px"} colorScheme='red' value='500'>below 500</Checkbox>
+      <Checkbox onChange={(e)=>{appendQuery("pmin",500);appendQuery("pmax",1000)}} isChecked={pmin==500&&pmax==1000} fontSize={"10px"} colorScheme='red' value='1000'>500 to 1000</Checkbox>
+      <Checkbox onChange={(e)=>{appendQuery("pmin",1000);appendQuery("pmax",false)}} isChecked={pmin==1000&&pmax=='false'} mb={4} fontSize={"10px"} colorScheme='red' value='1000'>above 1000</Checkbox>
       
       {/* select a price range */}
       <label htmlFor="">or select a price range</label>
       <Stack display={"flex"} flexDir={"row"} width={"100%"}>
-      <Input placeholder='min' type='number'/>
-      <Input placeholder='max' type='number'/>
+      <Input onChange={(e)=>{appendQuery("pmin",e.target.value)}}  placeholder='min' type='number'/>
+      <Input onChange={(e)=>{appendQuery("pmax",e.target.value)}}  placeholder='max' type='number'/>
       <Button ><CheckCircleIcon/></Button>
       </Stack>
       
@@ -90,7 +118,7 @@ function Categories1(){
   const navigate = useNavigate();
 
   function appendQuery(q,v){ //_________function for updating the data of query param
-   
+    const queryParams = new URLSearchParams(location.search);
    queryParams.set(q, v);
    navigate(`?${queryParams.toString()}`);
   //_______________________________________________________________________
@@ -163,12 +191,20 @@ function Size (){
 //dealing with query params__________________________________________________
 const queryParams = new URLSearchParams(location.search);
 const navigate = useNavigate();
+const [size,setSize]=useState("")
 
 function appendQuery(q,v){ //_________function for updating the data of query param
- 
  queryParams.set(q, v);
  navigate(`?${queryParams.toString()}`);
-//_______________________________________________________________________
+}
+useEffect(()=>{
+  getSizeFromQuery()
+},[location.search])
+function getSizeFromQuery(){
+  const queryParams = new URLSearchParams(location.search);
+  const size = queryParams.get("size");
+  setSize(size);
+
 }
 
 
@@ -176,11 +212,13 @@ function appendQuery(q,v){ //_________function for updating the data of query pa
 
   return (
     <Stack display={"flex"} >
-    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={true} fontSize={"15px"} colorScheme='red' value='S'>S(20)</Checkbox>
-    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={true} fontSize={"15px"} colorScheme='red' value='M'>M(3)</Checkbox>
-    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='L'>L(5)</Checkbox>
-    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='XL'>XL</Checkbox>
-    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} fontSize={"15px"} colorScheme='red' value='XXL'>XXL</Checkbox>
+    
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="All"} fontSize={"15px"} colorScheme='red' value={false}>All</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="S"} fontSize={"15px"} colorScheme='red' value='S'>S(20)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="M"} fontSize={"15px"} colorScheme='red' value='M'>M(3)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="L"} fontSize={"15px"} colorScheme='red' value='L'>L(5)</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="XL"} fontSize={"15px"} colorScheme='red' value='XL'>XL</Checkbox>
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="XXL"} fontSize={"15px"} colorScheme='red' value='XXL'>XXL</Checkbox>
     
     </Stack>
   )
