@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { cartSlice } from "./cart-slice";
+import {authSlice} from "./auth-slice";
 //persitant store start
 import { persistStore,persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"
@@ -24,6 +25,7 @@ import storage from "redux-persist/lib/storage"
 // 1. combine reducers (slicers content into a single reducer)
 const rootReducer = combineReducers({
     cart : cartSlice.reducer,
+    auth : authSlice.reducer
 })
 // 2. create a basic configuration to use local storage
 const persistConfig = {

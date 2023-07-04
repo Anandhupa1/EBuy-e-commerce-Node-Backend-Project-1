@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const cartSlice =createSlice({
     name:"cart",
     initialState:{
-        cart:[{product:"macbook pro",price:499}],
+        cart:[{product:"macbook profrom anandhu",price:499}],
         count:1,
         
     },

@@ -1,29 +1,16 @@
-import {
-  Box,
-  Flex,
-  Text,
-  IconButton,
-  Button,
-  Stack,
-  Collapse,
-  Icon,
-  Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
-} from '@chakra-ui/react';
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons';
+import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,PopoverTrigger,PopoverContent,useColorModeValue,useBreakpointValue,useDisclosure,
+Menu,MenuButton,Avatar,MenuList,MenuItem,MenuDivider,} from '@chakra-ui/react';
+import {HamburgerIcon,CloseIcon,ChevronDownIcon,ChevronRightIcon,} from '@chakra-ui/icons';
+import { useSelector } from 'react-redux';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
+   //reading redux store item
+   const userData = useSelector((store)=>store.auth.userData);
+   const loginStatus = useSelector((store)=>store.auth.status);
+   console.log(userData,loginStatus)
+   //redux store item read.
+
 
   return (
     <Box>
@@ -62,7 +49,7 @@ export default function WithSubnavigation() {
             <DesktopNav />
           </Flex>
         </Flex>
-
+        {!loginStatus? // checking user is logged in or not.
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
@@ -73,7 +60,7 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
-            href={'#'}>
+            href={'/signup'}>
             Sign Up
           </Button>
           <Button
@@ -83,7 +70,7 @@ export default function WithSubnavigation() {
             fontWeight={600}
             color={'white'}
             bg={'gray.800'}
-            href={'#'}
+            href={'/signin'}
             _hover={{
               bg: 'gray.100',
               color:'gray.800'
@@ -91,6 +78,35 @@ export default function WithSubnavigation() {
             Log in
           </Button>
         </Stack>
+        :
+        // if user is logged in ___________________________________________________________________
+        <Flex alignItems={'center'}>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={'full'}
+                variant={'link'}
+                cursor={'pointer'}
+                minW={0}>
+                <Avatar
+                  size={'sm'}
+                  src={userData?userData.profilePic:"https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-286.jpg?w=2000"}
+                />
+              </MenuButton>
+              <MenuList>
+                <Link href='/signup'>  <MenuItem>create another account</MenuItem></Link>
+                <Link href='/signin'>  <MenuItem>Login with another account</MenuItem></Link>
+               
+                
+                
+                <MenuDivider />
+                <Link href='#'>  <MenuItem>Logout</MenuItem></Link>
+              </MenuList>
+            </Menu>
+          </Flex>
+
+        }             
+
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
