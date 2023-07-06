@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBuy | e-commerce</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<style>
+  
+h1{
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  table{
+    width:100%;
+    table-layout: fixed;
+  }
+  .tbl-header{
+    background-color: rgba(255,255,255,0.3);
+   }
+  .tbl-content{
+    height:300px;
+    overflow-x:auto;
+    margin-top: 0px;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  th{
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  td{
+    padding: 15px;
+    text-align: left;
+    vertical-align:middle;
+    font-weight: 300;
+    font-size: 30px;
+    color: #fff;
+    border-bottom: solid 1px rgba(255,255,255,0.1);
+  }
+  
+  
+  /* demo styles */
+  
+  @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+  body{
+    background: -webkit-linear-gradient(left, #0c0f0e, #15191a);
+    background: linear-gradient(to right, #070707, #1b1e1f);
+    font-family: 'Roboto', sans-serif;
+  }
+  section{
+    margin: 50px;
+  }
+  
+  
+  /* follow me template */
+  
+  
+  /* for custom scrollbar for webkit browser*/
+  
+  ::-webkit-scrollbar {
+      width: 6px;
+  } 
+  ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  } 
+  ::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  }
+</style>
+
+
+
+
+
+<body>
+    <h1>EBuy | Documentation</h1>
+    
+    <section>
+        <!--for demo wrap-->
+        <!-- <h1>user side</h1> -->
+        <div class="tbl-header">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th>Purpose</th>
+                <th>URL</th>
+                <th>Method</th>
+                <!-- <th>Schema</th> -->
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              <tr>
+                <td>user Sign-up</td>
+                <td>       ______  /users/register</td>
+                <td>POST</td>
+                <!-- <td>{
+                    "userName":"a",
+                    "email":"a@gmail.com",
+                    "password":"a",
+                    "cpassword":"a"
+                    
+                    }</td> -->
+                
+              </tr>
+              <tr>
+                <td> login</td>
+                <td>  _________/users/login</td>
+                <td>POST</td>
+                
+              </tr>
+              <tr>
+                <td> order tracking (userId from header)</td>
+                <td>________/orders/user</td>
+                <td>GET</td>
+                
+              </tr>
+
+              <tr>
+                <td> all users</td>
+                <td>_________/users/register</td>
+                <td>GET</td>
+                
+              </tr>
+
+              <tr>
+                <td> all products</td>
+                <td>________/products</td>
+                <td>GET</td>
+                
+              </tr>
+              <tr>
+                <td> delete Products(only admin have access/high level security)</td>
+                <td>________/products/delete/:id</td>
+                <td>DELETE</td>
+                
+              </tr>
+             
+              <tr>
+                <td> update Products(only admin have access/high level security)</td>
+                <td>_______/products/update/:id</td>
+                <td>UPDATE</td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      
+
+<script src="./index.js"></script>    
+</body>
+</html>

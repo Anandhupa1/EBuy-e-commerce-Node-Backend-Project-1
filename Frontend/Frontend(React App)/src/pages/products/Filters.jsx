@@ -1,15 +1,20 @@
 
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import { GridItem,Input,Stack,Heading,Checkbox, Box, Button,Text,Image,P, SimpleGrid } from '@chakra-ui/react'
+import { GridItem,Input,Alert,AlertIcon,AlertTitle,AlertDescription,Stack,Heading,Checkbox, Box, Button,Text,Image,P, SimpleGrid } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import fetchProducts from "./fetchProducts"
 import { useSelector } from 'react-redux';
+import showToast from "../../utils/toast";
 
 
 
 
 function Filters() {
+ 
+    showToast("Heading","first toast","warning")
+  
+  
   return (
      <GridItem display={"flex"} justifyContent={"space-between"} flexDir={"column"}  area={'filter'}>
      <Categories1/>
@@ -212,8 +217,8 @@ function getSizeFromQuery(){
 
   return (
     <Stack display={"flex"} >
-    
-    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="All"} fontSize={"15px"} colorScheme='red' value={false}>All</Checkbox>
+ 
+    <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="false"} fontSize={"15px"} colorScheme='red' value={false}>All</Checkbox>
     <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="S"} fontSize={"15px"} colorScheme='red' value='S'>S(20)</Checkbox>
     <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="M"} fontSize={"15px"} colorScheme='red' value='M'>M(3)</Checkbox>
     <Checkbox onChange={(e)=>{appendQuery("size",e.target.value)}} isChecked={size=="L"} fontSize={"15px"} colorScheme='red' value='L'>L(5)</Checkbox>
