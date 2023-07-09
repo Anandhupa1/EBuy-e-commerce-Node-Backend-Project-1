@@ -1,4 +1,4 @@
-import React from 'react'
+import  { useEffect } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Carousel from '../components/Carousel'
@@ -10,20 +10,13 @@ import Loader from '../components/Loader'
 import { useSelector,useDispatch } from 'react-redux'
 import { loaderStatusUpdate } from '../store/loader-slice'
 import { Button } from '@chakra-ui/react'
+import fetchProducts from './products/fetchProducts'
+
+
 
 function Home() {
 
-  //loader starts _______________________________________________________
-  const loaderStatus = useSelector((store)=>store.loader.status);
-  const dispatch = useDispatch();
-  function stopLoader(){
-    dispatch(loaderStatusUpdate({status:false}));
-  }
-  function startLoader(){
-    dispatch(loaderStatusUpdate({status:true}));
-  }
-
-  //loader ends___________________________________________________________
+ 
   return (
     <>
       <Header/>

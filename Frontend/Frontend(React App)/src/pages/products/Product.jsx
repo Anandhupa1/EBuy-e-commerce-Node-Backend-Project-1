@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Box,Icon,Image,Stack,Text,Heading,Button} from "@chakra-ui/react"
 import {StarIcon} from "@chakra-ui/icons"
 import {FaHeart} from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { increase } from '../../store/cart-slice';
+import fetchProducts from './fetchProducts';
+import { baseUrl } from '../../configs/baseUrl';
 
 function Product() {
-  
-  let count = useSelector((store)=>store.cart.count)
   let dispatch = useDispatch();
+
+   let count = useSelector((store)=>store.cart.count)
+  
   function handleclick(){
   dispatch(increase())
   }
+
+
+
+
 
   return (
     <Box className='boxShadow' p={2} borderRadius={"5px"} display={"flex"} flexDir={"column"}  height='300px'>
@@ -31,7 +38,7 @@ function Product() {
       <Text>$3000</Text>
       </Stack>
       <Stack mt={2} display={"flex"} flexDir={"row"} justifyContent={"space-between"} width={"100%"} >
-      <Button  width={"30px"} background={"transparent"} _hover={{background:"transparent"}} borderRadius={"50%"} height={"30px"} onClick={handleclick} > <Like /></Button>
+      <Button  width={"30px"} background={"transparent"} _hover={{background:"transparent"}} borderRadius={"50%"} height={"30px"} onClick={()=>{alert("Hi")}} > <Like /></Button>
       <Button  width={"30px"} background={"transparent"} _hover={{background:"transparent"}} borderRadius={"50%"} height={"30px"} onClick={()=>{alert("hi")}} > <Cart /></Button>
       </Stack>
     </Box>
