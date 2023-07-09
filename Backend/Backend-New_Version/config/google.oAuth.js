@@ -25,7 +25,7 @@ passport.use(new GoogleStrategy({
      //if not there create a new user  and send new refresh token  with id
      //sample data below | use data from _json
      let userData ={
-       userName:profile._json.name,
+       name:profile._json.name,
        email:profile._json.email,
        password:uuidv4(),// ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
        profilePic : profile._json.picture

@@ -3,6 +3,7 @@ const { UserModel } = require('../models/user.model.js');
 const loginRouter = express.Router();
 const  bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { auth } = require('../middlewares/auth.js');
 
 
 
@@ -39,7 +40,14 @@ loginRouter.post('/',async (req,res)=>{
 
 })
 
-
+loginRouter.get("/user",auth,async(req,res)=>{
+    try {
+        let data = await UserModel.findById(req.body.userId);
+        res.send(data)
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 
 

@@ -11,12 +11,29 @@ import { useSelector,useDispatch } from 'react-redux'
 import { loaderStatusUpdate } from '../store/loader-slice'
 import { Button } from '@chakra-ui/react'
 import fetchProducts from './products/fetchProducts'
+import { baseUrl } from '../configs/baseUrl'
+import { addUserData } from '../store/auth-slice'
+
 
 
 
 function Home() {
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    async function fetchData() {
+      try {
+        const data = await fetchLoginedUserData();
+        //______________set the data in redux;
+       
+      if(data){dispatch(addUserData(data))}
+        
+      } catch (error) {
+        // Handle any errors
+      }
+    }
+    fetchData();
+  },[])
 
- 
   return (
     <>
       <Header/>
@@ -33,6 +50,37 @@ function Home() {
       
     </>
   )
+}
+
+
+
+
+async function fetchLoginedUserData(){
+  const cookies = document.cookie.split(';');
+  let authToken ;
+    // Find the authToken cookie
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+
+      if (cookie.startsWith('authToken=')) {
+        authToken = cookie.substring('authToken='.length);
+        
+        break;
+      }
+    }
+    // console.log('authToken:', authToken);
+    if(authToken){
+      let res = await fetch(`${baseUrl}/users/login/user`, {
+        method: 'GET', // or any other HTTP method
+        credentials: 'include' // include cookies and authentication headers
+      })
+      let result ;
+      let data = await res.json();
+      result =data;
+     
+      return result;
+    
+    }else{return false}
 }
 
 export default Home

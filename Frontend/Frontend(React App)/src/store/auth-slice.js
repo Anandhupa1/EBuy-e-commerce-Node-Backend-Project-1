@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice=createSlice({
     name:"auth",
     initialState:{
-        status : true,
+        status : false,
+        logined : false,
         userData : {
             name : "user",
             email:"user@gmail.com",
@@ -10,5 +11,14 @@ export const authSlice=createSlice({
 
 
         },
+    },
+    reducers : {
+        addUserData : (currentSlice, actions)=>{
+              currentSlice.userData = actions.payload;
+              currentSlice.logined = true;
+        }
     }
 })
+
+
+export const {addUserData} =authSlice.actions;

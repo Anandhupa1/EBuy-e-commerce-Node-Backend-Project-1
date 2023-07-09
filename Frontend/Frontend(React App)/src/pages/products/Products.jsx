@@ -13,25 +13,23 @@ import { changeCart } from '../../store/cart-slice';
 import { useLocation } from 'react-router-dom';
 import showToast from '../../utils/toast';
 function Products() {
-
+   
     //  showToast("Heading","first toast","warning")
 
     const location = useLocation();
     const dispatch  = useDispatch();
-    const cart = useSelector((store)=>store.cart.cart);
+  
     const [loaderStatus,setLoaderStatus] = useState(true);
   
   useEffect(()=>{
-    setLoaderStatus(true)
+    setLoaderStatus(true);
       const queryParams = new URLSearchParams(location.search);
       let url = `${baseUrl}/products?${queryParams.toString()}`;
         fetch(url).then(response => response.json()).then(data => {
-        console.log(data);
         dispatch(changeCart({data}))
-    setLoaderStatus(false)
+    setLoaderStatus(false);
        })
   },[location.search]);
-
 
 
 
