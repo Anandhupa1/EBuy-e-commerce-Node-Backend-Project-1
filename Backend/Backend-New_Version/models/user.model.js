@@ -4,24 +4,25 @@ require('mongoose-type-email');
 
 
 const addressSchema = mongoose.Schema({
-    city: String,
-    street: String,
+    city:{type:String,required:true},
+    street:{type:String,required:true},
     houseNumber: String,
-    pinCode :String,
+    pinCode :{type:String,required:true},
+    mobile : {type:String,required:true},
   });
 
 
 
 
 const userSchema = mongoose.Schema({
-       userName : {type:String, required : true},
+       name : {type:String, required : true},
        email    : { type: mongoose.SchemaTypes.Email, required: true},
        password : {type:String,required : true},
        profilePic:{type:String,default:"https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png"},
-       mobile : {type:String},
        billingAddress : {type:addressSchema},
-       shippingAdress:{type:addressSchema}
-       
+       shippingAdress:{type:addressSchema},
+       role :  {type: String, enum: ['admin', 'user', 'moderator'],default: 'user'},
+
 },{versionKey : false,timestamps:true});
 
 

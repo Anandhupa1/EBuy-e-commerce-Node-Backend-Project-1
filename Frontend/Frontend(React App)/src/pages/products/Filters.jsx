@@ -12,7 +12,7 @@ import showToast from "../../utils/toast";
 
 function Filters() {
  
-    showToast("Heading","first toast","warning")
+  
   
   
   return (

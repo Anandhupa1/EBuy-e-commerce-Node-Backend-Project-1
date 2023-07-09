@@ -4,6 +4,33 @@ const productRouter = express.Router();
 const {auth }= require('../middlewares/auth')
 
 
+
+
+productRouter.get("/",async(req,res)=>{
+    try {
+        let filter = {};
+        let q = req.query;
+        //category
+        if(q.category && q.category!=="any"){filter.category=q.category};
+        //price
+        if(q.pmin && q.pmax){filter.price={$gte:q.pmin, $lte:q.pmax}}
+        else if ((!q.pmin || q.pmin=="false" ) && q.pmax){filter.price={$lte:q.pmax}}
+        else if(q.pmin && (!q.pmax || q.pmax=="false")){filter.price={$gte:q.pmin}}
+        //color
+        if(q.color){filter.color=q.color}
+        //size
+        // if(q.size){filter.size=q.size}
+
+
+    //________________fetching data ____________________
+        let data = await productModel.find(filter);
+        res.send(data)
+    } catch (error) {
+        console.log("err in get post", error)
+    }
+})
+
+//___________________products_____________________________________________
 productRouter.post("/",auth,validateProduct,async (req,res)=>{
     try{
         let image = req.body.name;
@@ -27,10 +54,6 @@ productRouter.post("/",auth,validateProduct,async (req,res)=>{
 
 
 
-productRouter.get('/',async(req,res)=>{
-    let data =await productModel.find();
-    res.send(data)
-})
 
 ///////////////////////////////////////////////
 

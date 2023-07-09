@@ -3,14 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const cartSlice =createSlice({
     name:"cart",
     initialState:{
-        cart:[{product:"macbook profrom anandhu",price:499}],
+        cart:[],
         count:1,
         
     },
     reducers:{
         increase:(currentSlice,actions)=>{
          currentSlice.count++;
+        },
+        changeCart:(currentSlice,actions)=>{
+         currentSlice.cart=actions.payload.data;
         }
     }
 })
-export const {increase} =cartSlice.actions;
+export const {increase,changeCart} =cartSlice.actions;

@@ -6,14 +6,15 @@ const regRouter = express.Router();
 const{ auth} = require('../middlewares/auth');
 
 regRouter.post('/',async (req,res)=>{
-    let {userName,email,DOB,role,location,password,cpassword}=req.body;
-    if(password!==cpassword){res.status(401).json({error:"please fill password correctly"})}
-    else if(!userName|| !email || !password || !cpassword){
-        res.status(422).json({error:"Please fill all the fields"});
-    }
+    
     
 
     try{
+        let {name,email,password,cpassword}=req.body;
+        if(password!==cpassword){res.status(401).json({error:"please fill password correctly"})}
+        else if(!name|| !email || !password || !cpassword){
+        res.status(422).json({error:"Please fill all the fields"});
+        }else{
         let userExists = await UserModel.findOne({email :email});
         if(userExists){res.status(409).json({error:"user already exists"})}
         else{
@@ -23,6 +24,7 @@ regRouter.post('/',async (req,res)=>{
         await newUser.save();
         res.send(newUser)
         }
+    }
     }
     catch(err){
         console.log("error : register-post _________________________________")
