@@ -27,13 +27,8 @@ function Main() {
   
    }
     
-  
+
     
-   
-    
-    
-  
-   
     </SimpleGrid>
 
 

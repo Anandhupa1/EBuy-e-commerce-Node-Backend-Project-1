@@ -16,7 +16,10 @@ const { orderRouter } = require('./routes/order.js');
 const { googleRouter } = require('./routes/googleoAuth.js');
 const { categoryRouter } = require('./routes/category.js');
 
- app.use(cors())
+app.use(cors({
+   origin: 'http://localhost:3000',
+   credentials: true
+ }));
  app.use(express.json());
  app.use(cookieParser());
 //______________________________________________________________

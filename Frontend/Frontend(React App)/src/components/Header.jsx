@@ -1,15 +1,22 @@
 import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,PopoverTrigger,PopoverContent,useColorModeValue,useBreakpointValue,useDisclosure,
-Menu,MenuButton,Avatar,MenuList,MenuItem,MenuDivider,} from '@chakra-ui/react';
+Menu,MenuButton,Avatar,MenuList,MenuItem,MenuDivider, AlertDialog,} from '@chakra-ui/react';
 import {HamburgerIcon,CloseIcon,ChevronDownIcon,ChevronRightIcon,} from '@chakra-ui/icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 export default function WithSubnavigation() {
+  
   const { isOpen, onToggle } = useDisclosure();
-   //reading redux store item
-   const userData = useSelector((store)=>store.auth.userData);
-   const loginStatus = useSelector((store)=>store.auth.status);
-   console.log(userData,loginStatus)
-   //redux store item read.
+  //reading redux store item
+  const userData = useSelector((store)=>store.auth.userData);
+  const loginStatus = useSelector((store)=>store.auth.logined);
+  console.log(userData,loginStatus)
+  //redux store item read.
+//checking user login status __________________________________________
+
+
+//____________________________________________________________________
+
 
 
   return (
@@ -82,17 +89,29 @@ export default function WithSubnavigation() {
         // if user is logged in ___________________________________________________________________
         <Flex alignItems={'center'}>
             <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-                minW={0}>
-                <Avatar
-                  size={'sm'}
-                  src={userData?userData.profilePic:"https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-286.jpg?w=2000"}
-                />
-              </MenuButton>
+            
+            <MenuButton
+  as={Button}
+  rounded={'full'}
+  variant={'link'}
+  cursor={'pointer'}
+  display={'flex'}
+  alignItems={'center'}
+  justifyContent={'center'}
+  minW={0}
+>
+  <Flex align="center"> 
+    <Text as={"p"} fontSize={"12px"}>{loginStatus ? userData.name : 'username'}▼ </Text>
+    <Avatar
+      size={'sm'}
+      src={
+        loginStatus
+          ? userData.profilePic
+          : 'https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-286.jpg?w=2000'
+      }
+    />
+  </Flex>
+</MenuButton>
               <MenuList>
                 <Link href='/signup'>  <MenuItem>create another account</MenuItem></Link>
                 <Link href='/signin'>  <MenuItem>Login with another account</MenuItem></Link>
@@ -269,41 +288,30 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
+    label: 'Products',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#',
+        label: 'Laptops',
+        subLabel: 'Latest laptops at lowest price',
+        href: '/products',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
+        label: 'Mobile phones',
+        subLabel: 'Discover cutting-edge mobile phones that redefine technology at unbeatable prices.',
+        href: '/products',
       },
     ],
   },
+  
   {
-    label: 'Find Work',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
-      },
-    ],
+    label: 'cart',
+    href: '/cart',
   },
   {
-    label: 'Learn Design',
-    href: '#',
-  },
-  {
-    label: 'Hire Designers',
-    href: '#',
+    label: 'checkout',
+    href: '/checkout',
   },
 ];
+
+
+

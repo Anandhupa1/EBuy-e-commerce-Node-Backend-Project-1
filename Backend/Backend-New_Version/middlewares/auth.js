@@ -9,6 +9,9 @@ const auth = async (req,res,next)=>{
 //let incToken = req.headers.authtoken;
 let incToken = req.cookies.authToken;
 console.log(incToken,"token")
+
+
+
 await jwt.verify(incToken, 'masai', function(err, decoded) {
   
   console.log(decoded.userId,"decoded");
