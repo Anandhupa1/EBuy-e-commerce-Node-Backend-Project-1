@@ -5,6 +5,8 @@ import { changeCart } from '../../store/cart-slice';
 import { useDispatch } from 'react-redux';
 
 
+//this function is of no use currently________________________________________
+
 
 async function fetchProducts(){
   const queryParams = new URLSearchParams(location.search);

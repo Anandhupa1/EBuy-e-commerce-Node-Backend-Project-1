@@ -23,7 +23,7 @@ productRouter.get("/",async(req,res)=>{
 
 
     //________________fetching data ____________________
-        let data = await productModel.find(filter);
+        let data = await productModel.find(filter).limit(12);
         res.send(data)
     } catch (error) {
         console.log("err in get post", error)
