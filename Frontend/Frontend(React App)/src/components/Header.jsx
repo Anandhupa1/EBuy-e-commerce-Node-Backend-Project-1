@@ -2,18 +2,59 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
 Menu,MenuButton,Avatar,MenuList,MenuItem,MenuDivider, AlertDialog,} from '@chakra-ui/react';
 import {HamburgerIcon,CloseIcon,ChevronDownIcon,ChevronRightIcon,} from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
+import { baseUrl } from '../configs/baseUrl';
 
 export default function WithSubnavigation() {
-  
+  const [userData, setUserData] =useState(false);
+  const [loginStatus,setLoginStatus] =useState(false)
   const { isOpen, onToggle } = useDisclosure();
   //reading redux store item
-  const userData = useSelector((store)=>store.auth.userData);
-  const loginStatus = useSelector((store)=>store.auth.logined);
-  console.log(userData,loginStatus)
+  // const userData = useSelector((store)=>store.auth.userData);
+  //const loginStatus = useSelector((store)=>store.auth.logined);
+  //console.log(userData,loginStatus)
   //redux store item read.
 //checking user login status __________________________________________
+const dispatch = useDispatch();
+useEffect(()=>{
+  async function fetchData() {
+    try {
+      
+      const status = await fetchLoginedUserData();
+     
+      if(status && !loginStatus){
+       
+       
+        //fetch and use userdata 
+     
+      let res = await fetch(`${baseUrl}/users/login/user`, {
+        method: 'GET', // or any other HTTP method
+         credentials: 'include' // include cookies and authentication headers
+       })
+    if(res.ok){
+    
+      let data = await res.json();
+      setUserData(data);
+      setLoginStatus(true)
+    }else{alert("res.ok!==true")}
+     
+      }
 
+
+
+
+      //______________set the data in redux;
+     
+    // if(data){dispatch(addUserData(data))}
+    if(data){setUserData(data); alert("user data set");setLoginStatus(true)}
+   
+    } catch (error) {
+      // Handle any errors
+      console.log(error)
+    }
+  }
+  fetchData();
+},[])
 
 //____________________________________________________________________
 
@@ -313,5 +354,40 @@ const NAV_ITEMS: Array<NavItem> = [
   },
 ];
 
+
+//_________________________________________________________
+
+
+
+async function fetchLoginedUserData(){
+  const cookies = document.cookie.split(';');
+  let authToken ;
+    // Find the authToken cookie
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+
+      if (cookie.startsWith('authToken=')) {
+        authToken = cookie.substring('authToken='.length);
+        
+        break;
+      }
+    }
+    // console.log('authToken:', authToken);
+  if(authToken){return true}
+  else {return false}
+    // if(authToken){
+     
+    //   let res = await fetch(`${baseUrl}/users/login/user`, {
+    //     method: 'GET', // or any other HTTP method
+    //     credentials: 'include' // include cookies and authentication headers
+    //   })
+    
+    //   let data = await res.json();
+      
+     
+    //   return data;
+    
+    // }else{return false}
+}
 
 
