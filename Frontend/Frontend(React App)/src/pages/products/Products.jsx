@@ -9,7 +9,7 @@ import { Grid,GridItem } from "@chakra-ui/react";
 import  Pagination  from './Pagination';
 import Loader from '../../components/Loader';
 import { baseUrl } from '../../configs/baseUrl';
-import { changeCart } from '../../store/cart-slice';
+import { changeCart, changeCartCount } from '../../store/cart-slice';
 import { useLocation } from 'react-router-dom';
 import showToast from '../../utils/toast';
 function Products() {
@@ -26,7 +26,9 @@ function Products() {
       const queryParams = new URLSearchParams(location.search);
       let url = `${baseUrl}/products?${queryParams.toString()}`;
         fetch(url).then(response => response.json()).then(data => {
-        dispatch(changeCart({data}))
+        dispatch(changeCart({data:data.data}));
+        dispatch(changeCartCount({totalProducts:data.totalCount}));
+        
     setLoaderStatus(false);
        })
   },[location.search]);

@@ -4,27 +4,46 @@ const productRouter = express.Router();
 const {auth }= require('../middlewares/auth')
 
 
+//static filters data
+productRouter.get("/static",async(req,res)=>{
+    try {
+        res.send("static")
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 
+//filters
 productRouter.get("/",async(req,res)=>{
     try {
         let filter = {};
         let q = req.query;
+        //pagination
+        let page = q.page;
+        if(!page){page=1}
+        let count  = q.count;
+        if(!count){count=12}
         //category
         if(q.category && q.category!=="any"){filter.category=q.category};
         //price
-        if(q.pmin && q.pmax){filter.price={$gte:q.pmin, $lte:q.pmax}}
-        else if ((!q.pmin || q.pmin=="false" ) && q.pmax){filter.price={$lte:q.pmax}}
+       
+        if ((!q.pmin || q.pmin=="false" ) && q.pmax){filter.price={$lte:q.pmax}}
         else if(q.pmin && (!q.pmax || q.pmax=="false")){filter.price={$gte:q.pmin}}
+        else if(q.pmin && q.pmax){filter.price={$gte:q.pmin, $lte:q.pmax}}
         //color
         if(q.color){filter.color=q.color}
         //size
+
+        //search
+        if(q.search && q.search!==""){filter.name={ $regex: new RegExp(q.search, "i") } }
         // if(q.size){filter.size=q.size}
 
 
     //________________fetching data ____________________
-        let data = await productModel.find(filter).limit(12);
-        res.send(data)
+        let totalCount = await productModel.find(filter).count();
+        let data = await productModel.find(filter).skip((page-1)*count).limit(count);
+        res.send({totalCount,page,data})
     } catch (error) {
         console.log("err in get post", error)
     }
