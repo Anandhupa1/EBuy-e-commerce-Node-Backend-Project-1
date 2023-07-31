@@ -5,6 +5,7 @@ export const cartSlice =createSlice({
     initialState:{
         cart:[],
         count:1,
+        totalProducts:0,
         
     },
     reducers:{
@@ -13,7 +14,10 @@ export const cartSlice =createSlice({
         },
         changeCart:(currentSlice,actions)=>{
          currentSlice.cart=actions.payload.data;
+        },
+        changeCartCount(currentSlice,actions){
+            currentSlice.totalProducts=actions.payload.totalProducts
         }
     }
 })
-export const {increase,changeCart} =cartSlice.actions;
+export const {increase,changeCart,changeCartCount} =cartSlice.actions;
