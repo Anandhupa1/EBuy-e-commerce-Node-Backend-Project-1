@@ -11,7 +11,7 @@ import showToast from "../../utils/toast";
 
 
 function Filters() {
- 
+  
   
   
   
@@ -30,6 +30,9 @@ export default Filters
 
 // sub componenents
 function Categories(){
+  
+
+
   return(
     <Stack p={"4"} width={"100%"} height={"auto"} className='boxShadow' borderRadius={"10px"} >
     <Heading fontWeight={900} color={"grey.800"} fontSize={"17px"} >Shop By Categories</Heading>
@@ -58,9 +61,11 @@ function Subfilter(){
 
 
 function Colors(){
- 
+  const staticData = useSelector((store)=>store.static.static);
   const navigate = useNavigate();
-  let arr = ["pink.500","blue.700","gray.500","blue.100","yellow.300","orange.700","green","gold","black","gray.300"]
+  let arr = []
+  staticData.colors.forEach((item)=>{arr.push(`#${item._id}`)})
+  console.log(arr)
   function appendQuery(q,v){ //_________function for updating the data of query param
     const queryParams = new URLSearchParams(location.search);
    queryParams.set(q, v);
@@ -72,7 +77,8 @@ function Colors(){
      <GridItem as={"Button"} value={false} cursor={"pointer"} onClick={(e)=>{appendQuery("color",e.target.value)}}  borderRadius={"50%"} height={"20px"} borderWidth={"1px"} color={"gray.900"} borderColor={"gray.900"} fontSize={"10px"} >all</GridItem>
      
      {arr.map((item,i)=>{
-      return <GridItem key={i} as={"Button"} value="ffff" cursor={"pointer"} onClick={(e)=>{appendQuery("color",e.target.value)}} borderRadius={"50%"} height={"20px"} bgColor={item}></GridItem>
+      
+      return <GridItem key={i} as={"Button"} value={item.slice(1,item.length)} cursor={"pointer"} onClick={(e)=>{appendQuery("color",e.target.value)}} borderRadius={"50%"} height={"20px"} bgColor={item}></GridItem>
     
      })}
      </SimpleGrid>
@@ -118,6 +124,8 @@ function Stock(){
 }
 
 function Categories1(){
+  const staticData = useSelector((store)=>store.static.static);
+  
   //dealing with query params__________________________________________________
   const queryParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
@@ -139,16 +147,13 @@ function Categories1(){
     <Stack className='boxShadow' borderRadius={"10px"} mt={2} width={"100%"} p={3}  height={"auto"} >
     <Heading color={"black"} fontSize={"15px"}>Categories</Heading>
     <Stack display={"flex"} flexWrap={"wrap"} flexDir={"row"} >
-    <Button onClick={(e)=>{appendQuery("category",e.target.innerText)}}>any </Button>
-    <Button onClick={(e)=>{appendQuery("category",e.target.innerText)}}>anandhu </Button>
-    <Button>indor plants</Button>
-    <Button>laptop</Button>
 
-    {/* dummy button for alert */}
-    <Button onClick={fetchProducts}>alert query</Button>
+    {/* <Button onClick={(e)=>{appendQuery("category",e.target.innerText)}}>any </Button> */}
+    {staticData.categories.map((item)=>{
+      return <Button onClick={(e)=>{appendQuery("category",item._id)}}>{item.name} </Button>
+    })}
     
-    
-    
+
     </Stack>
     
     </Stack>

@@ -6,6 +6,7 @@ import {authSlice} from "./auth-slice";
 import { persistStore,persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"
 import { loaderSlice } from "./loader-slice";
+import { staticSlice } from "./static.slice";
 
 
 
@@ -28,6 +29,8 @@ const rootReducer = combineReducers({
     cart : cartSlice.reducer,
     auth : authSlice.reducer,
     loader:loaderSlice.reducer,
+    static:staticSlice.reducer,
+    
 })
 // 2. create a basic configuration to use local storage
 const persistConfig = {
