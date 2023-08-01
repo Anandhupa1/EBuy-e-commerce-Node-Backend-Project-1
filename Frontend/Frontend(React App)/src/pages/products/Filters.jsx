@@ -107,9 +107,9 @@ function Stock(){
       {/* select a price range */}
       <label htmlFor="">or select a price range</label>
       <Stack display={"flex"} flexDir={"row"} width={"100%"}>
-      <Input onChange={(e)=>{appendQuery("pmin",e.target.value)}}  placeholder='min' type='number'/>
-      <Input onChange={(e)=>{appendQuery("pmax",e.target.value)}}  placeholder='max' type='number'/>
-      <Button ><CheckCircleIcon/></Button>
+      <Input onChange={(e)=>{setPmin(e.target.value)} }   placeholder='min' type='number'/>
+      <Input onChange={(e)=>{setPmax(e.target.value)} } placeholder='max' type='number'/>
+      <Button onClick={()=>{appendQuery("pmax",pmax);appendQuery("pmin",pmin)}} ><CheckCircleIcon/></Button>
       </Stack>
       
       
