@@ -13,12 +13,25 @@ import { Button } from '@chakra-ui/react'
 import fetchProducts from './products/fetchProducts'
 import { baseUrl } from '../configs/baseUrl'
 import { addUserData } from '../store/auth-slice'
+import { addStaticData } from '../store/static.slice'
 
 
 
 
 function Home() {
- 
+  const staticFlag = useSelector((store)=>store.static.present);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+  if(!staticFlag){
+    fetch(`${baseUrl}/products/static`).then((data)=>{return data.json()})
+    .then((data)=>{
+     dispatch(addStaticData({static:data}));
+     
+    })
+    .catch((err)=>{console.log(error)})
+  }
+
+  },[])
 
   return (
     <>

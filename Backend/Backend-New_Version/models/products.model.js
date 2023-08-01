@@ -2,13 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 
-const skuSchema = mongoose.Schema({
-      
-       
-       
-       
 
-})
 
 
 const productSchema = mongoose.Schema({

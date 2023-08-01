@@ -1,13 +1,30 @@
 const express = require('express');
 const { productModel } = require('../models/products.model');
 const productRouter = express.Router();
-const {auth }= require('../middlewares/auth')
+const {auth }= require('../middlewares/auth');
+const { CategoryModel } = require('../models/category.model');
 
 
 //static filters data
 productRouter.get("/static",async(req,res)=>{
     try {
-        res.send("static")
+        let obj ={}
+        let categories = await CategoryModel.find();
+        obj.categories=categories;
+        let colors = await productModel.aggregate([
+            {
+                $group: {
+                  _id: '$color', // Group by the 'color' field
+                 
+                },
+              },
+        ]);
+        obj.colors = colors;
+
+
+
+
+        res.send(obj)
     } catch (error) {
         console.log(error)
     }
@@ -32,7 +49,9 @@ productRouter.get("/",async(req,res)=>{
         else if(q.pmin && (!q.pmax || q.pmax=="false")){filter.price={$gte:q.pmin}}
         else if(q.pmin && q.pmax){filter.price={$gte:q.pmin, $lte:q.pmax}}
         //color
-        if(q.color){filter.color=q.color}
+        if(q.color && q.color!=="false"){filter.color=q.color}
+        //category
+        if(q.category && q.category!=="false"){filter.categoryId=q.category}
         //size
 
         //search
