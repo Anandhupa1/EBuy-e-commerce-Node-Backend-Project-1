@@ -23,7 +23,7 @@ function Search() {
 
   return (
     <GridItem pr={"50px"} alignItems={"center"} justifyContent={"space-between"} display={"flex"} flexDir={"row"} pl='0' borderRadius={"10px"} className='boxShadow' area={'header'}>
-     <Input onChange={(e)=>{setInputValue(e.target.value)}} onKeyDown={(e)=>{appendQuery("search",inputValue)}} value={inputValue} placeholder='search anything here' borderRadius={"10px"}  border={"0px"} width={"90%"} type="text" />
+     <Input onChange={(e)=>{setInputValue(e.target.value)}} onKeyDown={(e)=>{if(e.key=="Enter"){appendQuery("search",inputValue)}}} value={inputValue} placeholder='search anything here' borderRadius={"10px"}  border={"0px"} width={"90%"} type="text" />
      < FaSearch onClick={()=>{appendQuery("search",inputValue)}} cursor={"pointer"}/>
   </GridItem>
   )
