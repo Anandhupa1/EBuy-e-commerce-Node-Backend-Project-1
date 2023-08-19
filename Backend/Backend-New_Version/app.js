@@ -15,6 +15,9 @@ const {auth}=require('./middlewares/auth');
 const { orderRouter } = require('./routes/order.js');
 const { googleRouter } = require('./routes/googleoAuth.js');
 const { categoryRouter } = require('./routes/category.js');
+const { adminRouter } = require('./routes/admin.js');
+const { cartRouter } = require('./routes/cart.js');
+const { paymentRouter } = require('./routes/payment.js');
 
 app.use(cors({
    origin: 'http://localhost:3000',
@@ -33,8 +36,10 @@ app.get('/', function(req, res) {
  app.use("/products",productRouter);
  app.use("/orders",orderRouter);
  app.use("/category",categoryRouter);
+ app.use("/admin",adminRouter);
+ app.use("/cart",cartRouter);
  app.use("/auth/google",googleRouter) ; //google oAuth route
- 
+ app.use("/payment",paymentRouter);
 //server_________________________________
 
 

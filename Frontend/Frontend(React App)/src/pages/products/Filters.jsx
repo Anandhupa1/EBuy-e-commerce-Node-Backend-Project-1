@@ -4,7 +4,7 @@ import { GridItem,Input,Alert,AlertIcon,AlertTitle,AlertDescription,Stack,Headin
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import fetchProducts from "./fetchProducts"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import showToast from "../../utils/toast";
 
 
@@ -125,7 +125,21 @@ function Stock(){
 
 function Categories1(){
   const staticData = useSelector((store)=>store.static.static);
+  const staticFlag = useSelector((store)=>store.static.present);
+  const dispatch = useDispatch();
   
+  useEffect(()=>{
+  if(!staticFlag){
+    fetch(`${baseUrl}/products/static`).then((data)=>{return data.json()})
+    .then((data)=>{
+     dispatch(addStaticData({static:data}));
+     
+    })
+    .catch((err)=>{console.log(error)})
+  }
+
+  },[])
+
   //dealing with query params__________________________________________________
   const queryParams = new URLSearchParams(location.search);
   const navigate = useNavigate();

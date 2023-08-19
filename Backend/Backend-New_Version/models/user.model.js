@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const  bcrypt = require('bcryptjs');
+const {  productSchema } = require('./products.model');
 require('mongoose-type-email');
 
 
@@ -22,6 +23,13 @@ const userSchema = mongoose.Schema({
        billingAddress : {type:addressSchema},
        shippingAdress:{type:addressSchema},
        role :  {type: String, enum: ['admin', 'user', 'moderator'],default: 'user'},
+       cart: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'product'
+        }
+      ]
+
 
 },{versionKey : false,timestamps:true});
 
