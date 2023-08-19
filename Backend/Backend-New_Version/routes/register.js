@@ -10,9 +10,9 @@ regRouter.post('/',async (req,res)=>{
     
 
     try{
-        let {name,email,password,cpassword}=req.body;
-        if(password!==cpassword){res.status(401).json({error:"please fill password correctly"})}
-        else if(!name|| !email || !password || !cpassword){
+        let {name,email,password,cPassword}=req.body;
+        if(password!==cPassword){res.status(401).json({error:"please fill password correctly"})}
+        else if(!name|| !email || !password || !cPassword){
         res.status(422).json({error:"Please fill all the fields"});
         }else{
         let userExists = await UserModel.findOne({email :email});
