@@ -8,7 +8,6 @@ const{ auth} = require('../middlewares/auth');
 regRouter.post('/',async (req,res)=>{
     
     
-
     try{
         let {name,email,password,cPassword}=req.body;
         if(password!==cPassword){res.status(401).json({error:"please fill password correctly"})}

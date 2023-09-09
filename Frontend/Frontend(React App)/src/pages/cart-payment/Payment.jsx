@@ -27,13 +27,15 @@ function App() {
         alert("Razorpay SDK failed to load. Are you online?");
         return;
     }
-
+    const response = await axios.get("http://localhost:4500/payment")
+    console.log("id from backend",response.data.data.id)
     const options = {
-        key: "rzp_test_ZuHHRWsjwu7V5n", // Enter the Key ID generated from the Dashboard
+        key: "rzp_test_UxQFlUckww5Hee", // Enter the Key ID generated from the Dashboard
         amount: 10000, // 100 --> 100 rupees 1 rs -- > 1 cent 1 paise
         currency: "INR",
-        name: "Sell a course",
-        description: "Its a very good razorpay course",
+        order_id:response.data.data.id,
+        name: "EBuy online store",
+        description: "Complete payment securely with us..",
         handler: async function (response) {
             const data = {
                 razorpayPaymentId: response.razorpay_payment_id,
@@ -43,9 +45,9 @@ function App() {
             console.log(data)
         },
         // prefill: {
-        //     name: "Gautham",
-        //     email: "kinggautham495@gmail.com",
-        //     contact: "9999999999",
+        //     name: "Anandhu P A",
+        //     email: "anandhupa131@gmail.com",
+        //     contact: "95263325467",
         // },
     };
 
