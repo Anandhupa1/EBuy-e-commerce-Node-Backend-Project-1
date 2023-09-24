@@ -56,11 +56,41 @@
 ```graphql
 
 - Project
-    ├── Frontend
-    │   ├── Frontend (React App)  # New updated version made with React, Chakra UI, Redux, etc.
-    │   └── Frontend (old version)  # Old version made with HTML, CSS, and JS
-    ├── BackEnd
-    └── README.md
+  ├── Frontend
+  │   ├── Frontend (React App)  # New updated version made with React, Chakra UI, Redux, etc.
+  │   │   ├── src
+  │   │   │   ├── assets
+  │   │   │   │   └── images
+  │   │   │   ├── components
+  │   │   │   ├── configs
+  │   │   │   ├── containers
+  │   │   │   ├── pages
+  │   │   │   │   ├── cart-payment
+  │   │   │   │   └── login&signup
+  │   │   │   ├── store
+  │   │   │   └── utils
+  │   ├── Frontend (old version)  # Old version made with HTML, CSS, and JS
+  │   │   ├── HTML Pages (*.html)
+  │   │   ├── Images
+  │   │   ├── JavaScript Scripts (*.js)
+  │   │   ├── Cart Scripts (*.js)
+  │   │   ├── CSS Styles (*.css)
+  │   │   └── Cart Styles (*.css)
+  ├── Backend
+  │   ├── New_Version
+  │   │   ├── config
+  │   │   ├── middlewares
+  │   │   ├── models
+  │   │   ├── routes
+  │   │   ├── views
+  │   │   ├── .env
+  │   │   ├── .gitignore
+  │   │   ├── app.js
+  │   │   ├── package.json
+  │   │   └── README.md
+  │   └── Old_Version
+  └── README.md
+
 
 ```
 
