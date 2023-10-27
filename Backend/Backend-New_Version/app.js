@@ -19,10 +19,24 @@ const { adminRouter } = require('./routes/admin.js');
 const { cartRouter } = require('./routes/cart.js');
 const { paymentRouter } = require('./routes/payment.js');
 
-app.use(cors({
-   origin: 'http://localhost:3000',
-   credentials: true
- }));
+// const allowedOrigins = [
+//    'http://localhost:3000',
+//    'https://e-buy-anandhupa1.vercel.app/'
+//  ];
+app.use(cors())
+//  app.use(cors({
+//    origin: function (origin, callback) {
+//      if (allowedOrigins.indexOf(origin) !== -1) {
+//        // If the origin is in the allowedOrigins array, allow it
+//        callback(null, true);
+//      } else {
+//        // If the origin is not in the allowedOrigins array, reject it
+//        callback(new Error('Not allowed by CORS'));
+//      }
+//    },
+//    credentials: true
+//  }));
+ 
  app.use(express.json());
  app.use(cookieParser());
 //______________________________________________________________

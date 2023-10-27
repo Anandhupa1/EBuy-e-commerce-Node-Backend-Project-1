@@ -26,27 +26,28 @@ paymentRouter.get('/', (req, res) => {
 // webhook route must always be a post request 
 
 paymentRouter.post('/', (req, res) => {
-    // console.log(req.headers)
-    let secret = 'gautham'
-    let reqBody= "",
-    signature = req.headers["x-razorpay-signature"];
-     req.on("data", (data) => {
-      reqBody += data;
-      console.log(reqBody)
-    });
-    req.on("end", (data) => {
-      console.log("is signature valid");
-      console.log(Razorpay.validateWebhookSignature(reqBody, signature, secret));
+    // validation 
+    let secret = 'anandhu'
+    
+    const crypto = require('crypto')
 
-      if(Razorpay.validateWebhookSignature(reqBody, signature, secret))
-      {
-          console.log("Set Data to the database")
-      }
-      else{
-          console.log("The data is wrong")
-      }
+	const shasum = crypto.createHmac('sha256', secret)
+	shasum.update(JSON.stringify(req.body))
+	const digest = shasum.digest('hex')
 
-     });
+	console.log(digest, req.headers['x-razorpay-signature'])
+
+	if (digest === req.headers['x-razorpay-signature']) {
+		console.log('request is valid')
+		// store information in database
+    console.log(req.body)
+		require('fs').writeFileSync('payment1.json', JSON.stringify(req.body, null, 4))
+	} else {
+		// send error message , trying to make an invalid request to server without razorpay. not allowed
+	}
+	res.json({ status: 'ok' })
+  
+  
   
   
   })
