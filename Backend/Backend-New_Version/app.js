@@ -19,11 +19,14 @@ const { adminRouter } = require('./routes/admin.js');
 const { cartRouter } = require('./routes/cart.js');
 const { paymentRouter } = require('./routes/payment.js');
 
+
+app.use(cors({ credentials: true, origin: true }));
+
 // const allowedOrigins = [
 //    'http://localhost:3000',
 //    'https://e-buy-anandhupa1.vercel.app/'
 //  ];
-app.use(cors())
+
 //  app.use(cors({
 //    origin: function (origin, callback) {
 //      if (allowedOrigins.indexOf(origin) !== -1) {
