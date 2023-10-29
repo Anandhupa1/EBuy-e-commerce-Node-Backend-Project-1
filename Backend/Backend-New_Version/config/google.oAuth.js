@@ -9,7 +9,7 @@ var GoogleStrategy = require( 'passport-google-oauth20' ).Strategy;
 passport.use(new GoogleStrategy({
     clientID:    process.env.GOOGLE_CLIENT_ID,
     clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:4500/auth/google/callback",
+    callbackURL: "https://unusual-outerwear-mite.cyclic.app/auth/google/callback",
   
   },
  function(request, accessToken, refreshToken, profile,cb) {
