@@ -40,7 +40,7 @@ const  token = jwt.sign({ userId: userInfoFromDb._id }, 'masai');
 
 //_______________________________
 res.cookie("authToken",token)
-res.redirect(302,"https://e-j1ht73pgy-anandhupa1.vercel.app") //redirect to any page
+res.redirect(302,"https://e-buy-anandhupa1.vercel.app") //redirect to any page
 }
 
 );
